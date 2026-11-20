@@ -26,3 +26,4 @@ environment/.env
 .DS_Store
 Thumbs.db
 environment/gcp-sa.json
+PROGRESS.md
