@@ -1,0 +1,193 @@
+{
+  "image": "samples/JWNR2000v3_JWNR2010v3_JWNR2000Tv3-v1.0.0.32.img",
+  "sha256": "17afced959a4ee06f996b3fb3a4495d0c54dc58f55ae70f772515184b69e36db",
+  "primary_rootfs": "work/scans/jwnr/extracted/rootfs/carved-direct-e8000",
+  "rootfs_candidates": [
+    {
+      "path": "work/scans/jwnr/extracted/rootfs/carved-direct-e8000",
+      "score": 21,
+      "method": "squashfs:carved-direct-e8000.sqfs"
+    }
+  ],
+  "services_enumerated": 3,
+  "binaries_analyzed": 3,
+  "firmware_versions": {},
+  "services": [
+    {
+      "name": "daemon",
+      "binary": "/usr/sbin/mini_httpd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/daemon.rc"
+      ],
+      "notes": []
+    },
+    {
+      "name": "daemon",
+      "binary": "/usr/bin/pc",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/daemon.rc"
+      ],
+      "notes": []
+    },
+    {
+      "name": "dsl",
+      "binary": "/bin/busybox",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/dsl.rc",
+        "etc/init.d/env.rc",
+        "etc/init.d/filesystem.rc",
+        "etc/init.d/network.rc",
+        "etc/init.d/private.rc",
+        "etc/init.d/rcS",
+        "etc/init.d/sysctl.rc",
+        "etc/init.d/usb.rc",
+        "etc/init.d/wlan.rc"
+      ],
+      "notes": []
+    }
+  ],
+  "binary_analyses": {
+    "/usr/sbin/mini_httpd": {
+      "binary": "work/scans/jwnr/extracted/rootfs/carved-direct-e8000/usr/sbin/mini_httpd",
+      "is_elf": true,
+      "arch": "ELF32 MIPS R3000 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "accept",
+          "bind",
+          "getsockname",
+          "listen",
+          "socket"
+        ],
+        "file_write": [
+          "fchown",
+          "fopen",
+          "fprintf",
+          "open"
+        ],
+        "auth": [],
+        "priv_drop": [
+          "initgroups",
+          "setgid",
+          "setgroups",
+          "setuid"
+        ]
+      },
+      "import_count": 115
+    },
+    "/usr/bin/pc": {
+      "binary": "work/scans/jwnr/extracted/rootfs/carved-direct-e8000/usr/bin/pc",
+      "is_elf": true,
+      "arch": "ELF32 MIPS R3000 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "bind",
+          "recvmsg",
+          "socket"
+        ],
+        "file_write": [
+          "fopen",
+          "fputs",
+          "fwrite"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 73
+    },
+    "/bin/busybox": {
+      "binary": "work/scans/jwnr/extracted/rootfs/carved-direct-e8000/bin/busybox",
+      "is_elf": true,
+      "arch": "ELF32 MIPS R3000 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "accept",
+          "bind",
+          "getpeername",
+          "getsockname",
+          "listen",
+          "recv",
+          "recvfrom",
+          "socket"
+        ],
+        "file_write": [
+          "chmod",
+          "chown",
+          "dprintf",
+          "fchmod",
+          "fchown",
+          "fopen",
+          "fprintf",
+          "fputc",
+          "fputs",
+          "link",
+          "mkdir",
+          "open",
+          "symlink",
+          "vfprintf"
+        ],
+        "auth": [
+          "crypt",
+          "getpwnam",
+          "getpwuid"
+        ],
+        "priv_drop": [
+          "initgroups",
+          "setgid",
+          "setgroups",
+          "setuid"
+        ]
+      },
+      "import_count": 287
+    }
+  },
+  "findings": [
+    {
+      "type": "unauthenticated_privileged_file_write",
+      "service": "daemon",
+      "binary": "/usr/bin/pc",
+      "user": "root",
+      "matched_network_symbols": [
+        "bind",
+        "recvmsg",
+        "socket"
+      ],
+      "matched_file_write_symbols": [
+        "fopen",
+        "fputs",
+        "fwrite"
+      ],
+      "auth_symbols_absent": true,
+      "priv_drop_absent": true,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/daemon.rc"
+      ],
+      "notes": [],
+      "import_count": 73,
+      "static_or_no_dynsyms": false,
+      "supplementary": {
+        "interesting_strings": [
+          "/var/pid/0x04",
+          "/etc/pc.ini",
+          "/var/mon.conf",
+          "/var/allmoduleinitok"
+        ]
+      },
+      "finding_id": "F001"
+    }
+  ],
+  "elapsed_extract_s": 149.0243854522705
+}

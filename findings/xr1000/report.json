@@ -1,0 +1,1144 @@
+{
+  "image": "samples/XR1000-V1.0.64.18_5.0.19.chk",
+  "sha256": "9ddf9e3aa4be29c4c9b12f4639fb465b0fff52d316898ea30b90fe12d2de5396",
+  "primary_rootfs": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000",
+  "rootfs_candidates": [
+    {
+      "path": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000",
+      "score": 23,
+      "method": "squashfs:carved-ubi-3a-383000.sqfs"
+    }
+  ],
+  "services_enumerated": 23,
+  "binaries_analyzed": 23,
+  "firmware_versions": {},
+  "services": [
+    {
+      "name": "ASH",
+      "binary": "/usr/bin/dal_ash",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/ASH"
+      ],
+      "notes": []
+    },
+    {
+      "name": "DALH",
+      "binary": "/usr/bin/dalh",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/DALH"
+      ],
+      "notes": []
+    },
+    {
+      "name": "K95acos_init",
+      "binary": "/bin/busybox",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/K95acos_init.sh",
+        "etc/init.d/S26acos_pre_init.sh",
+        "etc/init.d/S36acos_nat.sh",
+        "etc/init.d/S36acos_nat.sh",
+        "etc/init.d/S43acos_pre_init.sh",
+        "etc/init.d/S67acos_pre_init.sh",
+        "etc/init.d/bcm-base-drivers.sh",
+        "etc/init.d/d2",
+        "etc/init.d/d2_countryname.sh",
+        "etc/init.d/disk.sh",
+        "etc/init.d/gre-tunnel-drivers.sh",
+        "etc/init.d/hndmfg.sh",
+        "etc/init.d/hndmfg.sh",
+        "etc/init.d/hndnvram.sh",
+        "etc/init.d/mount-fs.sh",
+        "etc/init.d/mount-fs.sh",
+        "etc/init.d/net-config",
+        "etc/init.d/remGenie",
+        "etc/init.d/save-dmesg.sh",
+        "etc/init.d/ssl.sh",
+        "etc/init.d/switch.sh",
+        "etc/init.d/system-config.sh",
+        "etc/init.d/ubus",
+        "etc/init.d/wifi.sh"
+      ],
+      "notes": []
+    },
+    {
+      "name": "RA",
+      "binary": "/usr/bin/dal_ra",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/RA"
+      ],
+      "notes": []
+    },
+    {
+      "name": "S26acos_pre_init",
+      "binary": "/sbin/acos_service",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/S26acos_pre_init.sh",
+        "etc/init.d/S43acos_pre_init.sh",
+        "etc/init.d/S95acos_init.sh"
+      ],
+      "notes": []
+    },
+    {
+      "name": "UPAgent",
+      "binary": "/usr/bin/upagent",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/UPAgent"
+      ],
+      "notes": []
+    },
+    {
+      "name": "XAgent",
+      "binary": "/opt/xagent/xagent",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/XAgent"
+      ],
+      "notes": []
+    },
+    {
+      "name": "arpwatch",
+      "binary": "/usr/bin/arpwatch",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/arpwatch",
+        "etc/init.d/dumaos"
+      ],
+      "notes": []
+    },
+    {
+      "name": "bcm-wlan-drivers",
+      "binary": "/usr/sbin/utelnetd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/bcm-wlan-drivers.sh"
+      ],
+      "notes": []
+    },
+    {
+      "name": "boot_block_housekeeping",
+      "binary": "/bin/boot_block_housekeeping",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/boot_block_housekeeping.sh"
+      ],
+      "notes": []
+    },
+    {
+      "name": "bst",
+      "binary": "/usr/bin/bst_daemon",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/bst"
+      ],
+      "notes": []
+    },
+    {
+      "name": "conntrackd",
+      "binary": "/usr/sbin/conntrackd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/conntrackd"
+      ],
+      "notes": []
+    },
+    {
+      "name": "connwatch",
+      "binary": "/usr/bin/connwatch",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/connwatch"
+      ],
+      "notes": []
+    },
+    {
+      "name": "ctwatch",
+      "binary": "/usr/bin/ctwatch",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/ctwatch"
+      ],
+      "notes": []
+    },
+    {
+      "name": "dil",
+      "binary": "/usr/bin/fing_dil",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/dil"
+      ],
+      "notes": []
+    },
+    {
+      "name": "dropbear",
+      "binary": "/usr/sbin/dropbear",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/dropbear",
+        "etc/init.d/dropbear"
+      ],
+      "notes": []
+    },
+    {
+      "name": "dumaos",
+      "binary": "/bin/nvram",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/dumaos"
+      ],
+      "notes": []
+    },
+    {
+      "name": "hndmfg",
+      "binary": "/bin/smd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/hndmfg.sh",
+        "etc/init.d/smd.sh"
+      ],
+      "notes": []
+    },
+    {
+      "name": "ngcompat",
+      "binary": "/usr/bin/lua",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/ngcompat"
+      ],
+      "notes": []
+    },
+    {
+      "name": "remGenie",
+      "binary": "/opt/xagent/genie_handler",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/remGenie"
+      ],
+      "notes": []
+    },
+    {
+      "name": "remGenie",
+      "binary": "/opt/xagent/certs/ca-bundle-mega.crt",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/remGenie"
+      ],
+      "notes": []
+    },
+    {
+      "name": "smd",
+      "binary": "/bin/send_cms_msg",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/smd.sh"
+      ],
+      "notes": []
+    },
+    {
+      "name": "ubus",
+      "binary": "/sbin/ubusd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/ubus"
+      ],
+      "notes": []
+    }
+  ],
+  "binary_analyses": {
+    "/usr/bin/dal_ash": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/usr/bin/dal_ash",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fputs",
+          "open"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 113
+    },
+    "/usr/bin/dalh": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/usr/bin/dalh",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fopen",
+          "fputs",
+          "open"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 92
+    },
+    "/bin/busybox": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/bin/busybox",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 0
+    },
+    "/usr/bin/dal_ra": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/usr/bin/dal_ra",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fputs",
+          "open"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 78
+    },
+    "/sbin/acos_service": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/sbin/acos_service",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "chmod",
+          "fopen64",
+          "fprintf",
+          "fputc",
+          "fputs",
+          "mkdir",
+          "open64",
+          "rename",
+          "symlink"
+        ],
+        "auth": [
+          "crypt"
+        ],
+        "priv_drop": []
+      },
+      "import_count": 262
+    },
+    "/usr/bin/upagent": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/usr/bin/upagent",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "accept",
+          "bind",
+          "listen",
+          "socket",
+          "socketpair"
+        ],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fputs",
+          "open",
+          "vfprintf"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 123
+    },
+    "/opt/xagent/xagent": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/opt/xagent/xagent",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "SSL_read",
+          "accept",
+          "bind",
+          "listen",
+          "socket"
+        ],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fwrite",
+          "open",
+          "rename",
+          "vfprintf"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 180
+    },
+    "/usr/bin/arpwatch": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/usr/bin/arpwatch",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "bind",
+          "recv",
+          "recvmsg",
+          "socket"
+        ],
+        "file_write": [
+          "fprintf",
+          "fputc",
+          "fwrite"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 53
+    },
+    "/usr/sbin/utelnetd": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/usr/sbin/utelnetd",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "accept",
+          "bind",
+          "listen",
+          "socket"
+        ],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fputc",
+          "fputs",
+          "open"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 56
+    },
+    "/bin/boot_block_housekeeping": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/bin/boot_block_housekeeping",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fprintf",
+          "fputs",
+          "open"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 40
+    },
+    "/usr/bin/bst_daemon": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/usr/bin/bst_daemon",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fopen",
+          "fputs",
+          "fwrite",
+          "open"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 88
+    },
+    "/usr/sbin/conntrackd": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/usr/sbin/conntrackd",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "accept",
+          "bind",
+          "listen",
+          "recv",
+          "recvfrom",
+          "socket"
+        ],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fputc",
+          "fputs",
+          "fwrite",
+          "open",
+          "vfprintf"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 199
+    },
+    "/usr/bin/connwatch": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/usr/bin/connwatch",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "bind",
+          "recv",
+          "socket"
+        ],
+        "file_write": [],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 53
+    },
+    "/usr/bin/ctwatch": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/usr/bin/ctwatch",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "bind",
+          "recv",
+          "socket"
+        ],
+        "file_write": [
+          "fprintf",
+          "fputc",
+          "fwrite"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 63
+    },
+    "/usr/bin/fing_dil": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/usr/bin/fing_dil",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fputs",
+          "open"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 108
+    },
+    "/usr/sbin/dropbear": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/usr/sbin/dropbear",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "accept",
+          "bind",
+          "getpeername",
+          "getsockname",
+          "listen",
+          "socket"
+        ],
+        "file_write": [
+          "chmod",
+          "chown",
+          "fopen64",
+          "fprintf",
+          "fputc",
+          "fputs",
+          "fwrite",
+          "link",
+          "mkdir",
+          "open64",
+          "vfprintf"
+        ],
+        "auth": [
+          "crypt",
+          "getpwnam",
+          "getpwuid",
+          "getspnam"
+        ],
+        "priv_drop": [
+          "initgroups",
+          "setegid",
+          "seteuid",
+          "setgid",
+          "setuid"
+        ]
+      },
+      "import_count": 148
+    },
+    "/bin/nvram": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/bin/nvram",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fopen",
+          "fprintf"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 46
+    },
+    "/bin/smd": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/bin/smd",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "accept",
+          "bind",
+          "listen",
+          "socket"
+        ],
+        "file_write": [
+          "fopen"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 90
+    },
+    "/usr/bin/lua": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/usr/bin/lua",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fprintf",
+          "fputc",
+          "fputs"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 52
+    },
+    "/opt/xagent/genie_handler": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/opt/xagent/genie_handler",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "socket"
+        ],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fputs",
+          "rename",
+          "vfprintf"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 71
+    },
+    "/opt/xagent/certs/ca-bundle-mega.crt": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/opt/xagent/certs/ca-bundle-mega.crt",
+      "is_elf": false,
+      "arch": null,
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 0
+    },
+    "/bin/send_cms_msg": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/bin/send_cms_msg",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 21
+    },
+    "/sbin/ubusd": {
+      "binary": "work/scans/xr1000/extracted/rootfs/carved-ubi-3a-383000/sbin/ubusd",
+      "is_elf": true,
+      "arch": "ELF32 ARM EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "accept",
+          "recvmsg"
+        ],
+        "file_write": [
+          "fprintf",
+          "open"
+        ],
+        "auth": [
+          "getpwuid"
+        ],
+        "priv_drop": []
+      },
+      "import_count": 70
+    }
+  },
+  "findings": [
+    {
+      "type": "unauthenticated_privileged_file_write",
+      "service": "UPAgent",
+      "binary": "/usr/bin/upagent",
+      "user": "root",
+      "matched_network_symbols": [
+        "accept",
+        "bind",
+        "listen",
+        "socket",
+        "socketpair"
+      ],
+      "matched_file_write_symbols": [
+        "fopen",
+        "fprintf",
+        "fputs",
+        "open",
+        "vfprintf"
+      ],
+      "auth_symbols_absent": true,
+      "priv_drop_absent": true,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/UPAgent"
+      ],
+      "notes": [],
+      "import_count": 123,
+      "static_or_no_dynsyms": false,
+      "supplementary": {
+        "interesting_strings": [
+          "/tmp/libXhdlr.log",
+          "/tmp/upagent"
+        ]
+      },
+      "finding_id": "F001"
+    },
+    {
+      "type": "unauthenticated_privileged_file_write",
+      "service": "XAgent",
+      "binary": "/opt/xagent/xagent",
+      "user": "root",
+      "matched_network_symbols": [
+        "SSL_read",
+        "accept",
+        "bind",
+        "listen",
+        "socket"
+      ],
+      "matched_file_write_symbols": [
+        "fopen",
+        "fprintf",
+        "fwrite",
+        "open",
+        "rename",
+        "vfprintf"
+      ],
+      "auth_symbols_absent": true,
+      "priv_drop_absent": true,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/XAgent"
+      ],
+      "notes": [],
+      "import_count": 180,
+      "static_or_no_dynsyms": false,
+      "supplementary": {
+        "interesting_strings": [
+          "/etc/xagent.conf",
+          "/etc/resolv.conf",
+          "/tmp/xagent.log",
+          "/tmp/xagent.pid",
+          "/tmp/xagent_watchdog.pid"
+        ]
+      },
+      "finding_id": "F002"
+    },
+    {
+      "type": "unauthenticated_privileged_file_write",
+      "service": "arpwatch",
+      "binary": "/usr/bin/arpwatch",
+      "user": "root",
+      "matched_network_symbols": [
+        "bind",
+        "recv",
+        "recvmsg",
+        "socket"
+      ],
+      "matched_file_write_symbols": [
+        "fprintf",
+        "fputc",
+        "fwrite"
+      ],
+      "auth_symbols_absent": true,
+      "priv_drop_absent": true,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/arpwatch",
+        "etc/init.d/dumaos"
+      ],
+      "notes": [],
+      "import_count": 53,
+      "static_or_no_dynsyms": false,
+      "supplementary": {
+        "interesting_strings": [
+          "/var/run/ubus.sock"
+        ]
+      },
+      "finding_id": "F003"
+    },
+    {
+      "type": "unauthenticated_privileged_file_write",
+      "service": "bcm-wlan-drivers",
+      "binary": "/usr/sbin/utelnetd",
+      "user": "root",
+      "matched_network_symbols": [
+        "accept",
+        "bind",
+        "listen",
+        "socket"
+      ],
+      "matched_file_write_symbols": [
+        "fopen",
+        "fprintf",
+        "fputc",
+        "fputs",
+        "open"
+      ],
+      "auth_symbols_absent": true,
+      "priv_drop_absent": true,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/bcm-wlan-drivers.sh"
+      ],
+      "notes": [],
+      "import_count": 56,
+      "static_or_no_dynsyms": false,
+      "supplementary": {
+        "interesting_strings": [
+          "/etc/issue.net"
+        ]
+      },
+      "finding_id": "F004"
+    },
+    {
+      "type": "unauthenticated_privileged_file_write",
+      "service": "conntrackd",
+      "binary": "/usr/sbin/conntrackd",
+      "user": "root",
+      "matched_network_symbols": [
+        "accept",
+        "bind",
+        "listen",
+        "recv",
+        "recvfrom",
+        "socket"
+      ],
+      "matched_file_write_symbols": [
+        "fopen",
+        "fprintf",
+        "fputc",
+        "fputs",
+        "fwrite",
+        "open",
+        "vfprintf"
+      ],
+      "auth_symbols_absent": true,
+      "priv_drop_absent": true,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/conntrackd"
+      ],
+      "notes": [],
+      "import_count": 199,
+      "static_or_no_dynsyms": false,
+      "supplementary": {
+        "interesting_strings": [
+          "/etc/conntrackd/conntrackd.conf",
+          "/var/log/conntrackd.log",
+          "getprotobyname() cannot find protocol `%s' in /etc/protocols",
+          "getprotobyname() cannot find protocol `tcp' in /etc/protocols",
+          "getprotobyname() cannot find protocol `udp' in /etc/protocols",
+          "/var/log/conntrackd-stats.log",
+          "/var/lock/conntrackd.lock",
+          "../../../libgcc/config/arm/lib1funcs.S",
+          "../../../libgcc/config/arm"
+        ]
+      },
+      "finding_id": "F005"
+    },
+    {
+      "type": "unauthenticated_privileged_file_write",
+      "service": "ctwatch",
+      "binary": "/usr/bin/ctwatch",
+      "user": "root",
+      "matched_network_symbols": [
+        "bind",
+        "recv",
+        "socket"
+      ],
+      "matched_file_write_symbols": [
+        "fprintf",
+        "fputc",
+        "fwrite"
+      ],
+      "auth_symbols_absent": true,
+      "priv_drop_absent": true,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/ctwatch"
+      ],
+      "notes": [],
+      "import_count": 63,
+      "static_or_no_dynsyms": false,
+      "supplementary": {
+        "interesting_strings": [
+          "/var/run/ubus.sock"
+        ]
+      },
+      "finding_id": "F006"
+    },
+    {
+      "type": "unauthenticated_privileged_file_write",
+      "service": "hndmfg",
+      "binary": "/bin/smd",
+      "user": "root",
+      "matched_network_symbols": [
+        "accept",
+        "bind",
+        "listen",
+        "socket"
+      ],
+      "matched_file_write_symbols": [
+        "fopen"
+      ],
+      "auth_symbols_absent": true,
+      "priv_drop_absent": true,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/hndmfg.sh",
+        "etc/init.d/smd.sh"
+      ],
+      "notes": [],
+      "import_count": 90,
+      "static_or_no_dynsyms": false,
+      "supplementary": {
+        "interesting_strings": [
+          "/tmp/smd_shutdown_in_progress",
+          "/var/smd_messaging_server_addr"
+        ]
+      },
+      "finding_id": "F007"
+    },
+    {
+      "type": "unauthenticated_privileged_file_write",
+      "service": "remGenie",
+      "binary": "/opt/xagent/genie_handler",
+      "user": "root",
+      "matched_network_symbols": [
+        "socket"
+      ],
+      "matched_file_write_symbols": [
+        "fopen",
+        "fprintf",
+        "fputs",
+        "rename",
+        "vfprintf"
+      ],
+      "auth_symbols_absent": true,
+      "priv_drop_absent": true,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/remGenie"
+      ],
+      "notes": [],
+      "import_count": 71,
+      "static_or_no_dynsyms": false,
+      "supplementary": {
+        "interesting_strings": [
+          "/tmp/genie_handler.log",
+          "/opt/xagent/etc/xagent.conf"
+        ]
+      },
+      "finding_id": "F008"
+    }
+  ],
+  "elapsed_extract_s": 126.14396357536316,
+  "elapsed_s": 126.15410351753235,
+  "gemini": {
+    "scan_summary": "The structural analysis of XR1000 firmware version V1.0.64.18_5.0.19 identifies several high-risk services (UPAgent, XAgent, utelnetd) running as root with network listeners and file-write capabilities but lacking authentication or privilege separation symbols. Specifically, XAgent and remGenie demonstrate the ability to modify critical configuration files in /etc/ while exposed to network inputs. Several monitoring services (arpwatch, ctwatch) appear to have limited risk, likely restricted to internal logging.",
+    "findings": [
+      {
+        "finding_id": "F001",
+        "title": "Unauthenticated Root File Write in UPAgent",
+        "explanation": "The UPAgent service listens on the network and runs with full root privileges without any detected authentication or privilege-dropping logic. It imports functions that allow it to create and write to files, creating a risk where a remote user could potentially overwrite system files.",
+        "priority": "High",
+        "attack_scenario": "A remote attacker sends a crafted network packet to the UPAgent service's listening port, exploiting the lack of authentication to overwrite arbitrary system files via the vfprintf or open functions.",
+        "permanent_fix": "Implement robust challenge-response authentication for all network commands and transition the service to run as a dedicated non-privileged user instead of root.",
+        "immediate_mitigation": "Use the device's internal firewall to block network access to the UPAgent service's port from the WAN and untrusted LAN segments.",
+        "compromise_indicators": "Check for the existence of unexpected files in /tmp/upagent or modification timestamps on /tmp/libXhdlr.log that do not align with legitimate device activity."
+      },
+      {
+        "finding_id": "F002",
+        "title": "Privileged Configuration Overwrite in XAgent",
+        "explanation": "XAgent is a root-level service that uses SSL for communication but lacks internal authentication symbols, and it possesses the capability to write and rename files in sensitive locations like /etc/. This could allow an attacker to redirect device traffic by modifying system configuration files.",
+        "priority": "High",
+        "attack_scenario": "An attacker leverages an unauthenticated SSL connection to XAgent to trigger a file write that replaces /etc/resolv.conf, thereby hijacking the device's DNS resolution.",
+        "permanent_fix": "Adopt a least-privilege model by using a non-root account for XAgent and implement strict path validation to prevent writing outside of designated temporary directories.",
+        "immediate_mitigation": "Disable remote management features that rely on XAgent if not required and restrict access to the service's port to known administrative IP addresses.",
+        "compromise_indicators": "Inspect /etc/xagent.conf and /etc/resolv.conf for unauthorized changes or entries, and check /tmp/xagent.log for unusual error messages or connection attempts."
+      },
+      {
+        "finding_id": "F003",
+        "title": "Restricted File Writing in arpwatch",
+        "explanation": "While arpwatch runs as root and receives network data, its file-writing capabilities are limited to basic logging functions (fprintf, fputc). The risk is lower as it primarily interacts with internal sockets and lacks the 'open' symbol for creating new files.",
+        "priority": "Low",
+        "attack_scenario": "An attacker on the local network sends a flood of ARP packets to exhaust disk space by forcing arpwatch to write excessive log data through its ubus connection.",
+        "permanent_fix": "Configure arpwatch to drop privileges to a 'nobody' or 'arpwatch' user after the initial socket binding.",
+        "immediate_mitigation": "Ensure the device is not reachable from untrusted local network segments where ARP spoofing or flooding could occur.",
+        "compromise_indicators": "Monitor for unusually large log files or high CPU usage associated with the /usr/bin/arpwatch process."
+      },
+      {
+        "finding_id": "F004",
+        "title": "Unauthenticated Root Telnet Access",
+        "explanation": "The utelnetd binary provides a remote terminal interface running as root. The absence of authentication symbols within the binary itself suggests it relies on external mechanisms or may be completely unauthenticated, posing a critical risk of remote shell access.",
+        "priority": "High",
+        "attack_scenario": "An attacker connects to the device's Telnet port and gains immediate root shell access due to the service running with root privileges without enforced authentication.",
+        "permanent_fix": "Disable the utelnetd service entirely in production firmware and replace it with an encrypted, authenticated SSH daemon like Dropbear.",
+        "immediate_mitigation": "Disable the Telnet service through the web management interface or block the Telnet port (typically 23) at the network perimeter.",
+        "compromise_indicators": "Check the process list for active 'utelnetd' instances and examine /etc/issue.net for any modifications indicating a persistent banner change."
+      },
+      {
+        "finding_id": "F005",
+        "title": "Privileged State Management in conntrackd",
+        "explanation": "The conntrackd service manages network connection state and runs as root. It possesses extensive file-writing capabilities and listens for network data to synchronize state, but it lacks evidence of built-in authentication for these synchronization packets.",
+        "priority": "Medium",
+        "attack_scenario": "An attacker sends malicious state-synchronization packets to conntrackd's listening port to corrupt the kernel's connection tracking table or overwrite the /var/log/conntrackd.log file.",
+        "permanent_fix": "Enable cryptographically signed state synchronization and ensure the daemon drops privileges after initializing its netlink sockets.",
+        "immediate_mitigation": "Isolate the conntrackd synchronization traffic to a dedicated, private VLAN or use an internal firewall to restrict traffic to the synchronization port.",
+        "compromise_indicators": "Check /var/log/conntrackd.log and /var/log/conntrackd-stats.log for entries originating from unauthorized IP addresses."
+      },
+      {
+        "finding_id": "F006",
+        "title": "Internal Monitoring Service Write Risk (ctwatch)",
+        "explanation": "ctwatch appears to be an internal connection tracking monitor. It imports limited file-write symbols and interacts primarily with the internal ubus system, suggesting its external attack surface is minimal.",
+        "priority": "Low",
+        "attack_scenario": "An attacker who has already gained limited access to the system uses the ubus socket to send messages that cause ctwatch to write data into its log streams.",
+        "permanent_fix": "Ensure the service runs under a restricted user account and that ubus access policies prevent unauthorized interaction with ctwatch.",
+        "immediate_mitigation": "Restrict access to the physical and logical management interfaces of the device.",
+        "compromise_indicators": "Check for existence or unusual growth of files related to connection tracking in /var/run/ or /var/log/."
+      },
+      {
+        "finding_id": "F007",
+        "title": "Unauthenticated System Management Messaging (smd)",
+        "explanation": "The smd (System Management Daemon) service handles internal messaging and runs as root. It listens on the network and can create files like /tmp/smd_shutdown_in_progress, which could be abused to disrupt device operations.",
+        "priority": "Medium",
+        "attack_scenario": "An attacker sends a specific management command to the smd network listener to force a system shutdown or create a denial-of-service condition.",
+        "permanent_fix": "Implement a local-only socket for smd messaging or add a shared-secret authentication layer for network-based management commands.",
+        "immediate_mitigation": "Firewall the smd service port (identified by /var/smd_messaging_server_addr) to prevent any external interaction.",
+        "compromise_indicators": "Look for the file /tmp/smd_shutdown_in_progress which may indicate an attempt to use the daemon to reboot or shut down the device."
+      },
+      {
+        "finding_id": "F008",
+        "title": "Remote Configuration Manipulation in remGenie",
+        "explanation": "The remGenie service (genie_handler) runs as root and can rename and write files, specifically targeting the XAgent configuration. While it has fewer network symbols than others, its ability to modify /opt/xagent/etc/xagent.conf is a significant risk if its socket is reachable.",
+        "priority": "Medium",
+        "attack_scenario": "An attacker exploits a vulnerability in the genie_handler process to rename a malicious configuration file into /opt/xagent/etc/xagent.conf, changing the behavior of the XAgent management service.",
+        "permanent_fix": "Enforce strict file permissions on the /opt/xagent/etc/ directory and use O_NOFOLLOW to prevent symlink-based file write attacks.",
+        "immediate_mitigation": "Monitor the /tmp directory for unauthorized files starting with 'genie' and restrict the genie_handler process if it is not required for daily operations.",
+        "compromise_indicators": "Compare the current /opt/xagent/etc/xagent.conf with a known good backup and check /tmp/genie_handler.log for unexpected execution traces."
+      }
+    ]
+  }
+}

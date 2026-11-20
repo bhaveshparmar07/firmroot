@@ -1,0 +1,1406 @@
+{
+  "image": "samples/EDS5000_2.3.0.0R7.rom",
+  "sha256": "a380bd86800456b45014b5069e3d140def0d5193e5bd1a1c89af06184e374ff1",
+  "primary_rootfs": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000",
+  "rootfs_candidates": [
+    {
+      "path": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000",
+      "score": 28,
+      "method": "squashfs:carved-ubi-de0100-3e000.sqfs"
+    },
+    {
+      "path": "work/scans/eds5000/extracted/rootfs/carved-ubi-2be0200-3e000",
+      "score": 28,
+      "method": "squashfs:carved-ubi-2be0200-3e000.sqfs"
+    }
+  ],
+  "services_enumerated": 28,
+  "binaries_analyzed": 28,
+  "firmware_versions": {
+    "etc/openwrt_release": "DISTRIB_ID='Lantronix EDS5000'\nDISTRIB_RELEASE='2.3.0.0R7'\nDISTRIB_REVISION='r19685-512e76967f'\nDISTRIB_TARGET='ma35d1/som'\nDISTRIB_ARCH='aarch64_generic'\nDISTRIB_DESCRIPTION='Lantronix EDS5000 2.3.0.0R7'\nDISTRIB_TAINTS='no-all busybox'\nDISTRIB_SUPRT_URL='https://cdn.lantronix.com/wp-content/uploads/pdf/PMD-00226_A-EDS5000-Series-Device-Server-User-Guide.pdf'\nDISTRIB_MANF_URL='https://www.lantronix.com'\nDISTRIB_BUG_URL='https://www.lantronix.com/support/'\nDISTRIB_HOME_URL='http://update.lantronix.com/'",
+    "etc/openwrt_version": "r19685-512e76967f",
+    "etc/os-release": "NAME=\"Lantronix EDS5000\"\nVERSION=\"2.3.0.0R7\"\nID=\"lantronix_eds5000\"\nID_LIKE=\"lede openwrt\"\nPRETTY_NAME=\"Lantronix EDS5000 2.3.0.0R7\"\nVERSION_ID=\"2.3.0.0r7\"\nHOME_URL=\"http://update.lantronix.com/\"\nBUG_URL=\"https://www.lantronix.com/support/\"\nSUPPORT_URL=\"https://cdn.lantronix.com/wp-content/uploads/pdf/PMD-00226_A-EDS5000-Series-Device-Server-User-Guide.pdf\"\nBUILD_ID=\"r19685-512e76967f\"\nOPENWRT_BOARD=\"ma35d1/som\"\nOPENWRT_ARCH=\"aarch64_generic\"\nOPENWRT_TAINTS=\"no-all busybox\"\nOPENWRT_DEVICE_MANUFACTURER=\"Lantronix\"\nOPENWRT_DEVICE_MANUFACTURER_URL=\"https://www.lantronix.com\"\nOPENWRT_DEVICE_PRODUCT=\"EDS5000\"\nOPENWRT_DEVICE_REVISION=\"v0\"\nOPENWRT_RELEASE=\"Lantronix EDS5000 2.3.0.0R7 r19685-512e76967f\""
+  },
+  "services": [
+    {
+      "name": "auditwatch",
+      "binary": "/bin/busybox",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/auditwatch",
+        "etc/init.d/cron",
+        "etc/init.d/done",
+        "etc/init.d/email",
+        "etc/init.d/eventtrack",
+        "etc/init.d/firewall",
+        "etc/init.d/ftp",
+        "etc/init.d/gpio_switch",
+        "etc/init.d/led",
+        "etc/init.d/ltrx-sshclientknownhosts",
+        "etc/init.d/ltrx-sshclientusers",
+        "etc/init.d/ltrx-sshserverkeys",
+        "etc/init.d/ltrx-sshserverusers",
+        "etc/init.d/ltrx-ssl",
+        "etc/init.d/mosquitto",
+        "etc/init.d/ndppd",
+        "etc/init.d/nuevo80.sh",
+        "etc/init.d/openssl",
+        "etc/init.d/percepxion",
+        "etc/init.d/percepxion_line",
+        "etc/init.d/run_extraconfg",
+        "etc/init.d/schedulereboot",
+        "etc/init.d/serialinit",
+        "etc/init.d/simtraydetection",
+        "etc/init.d/smtp",
+        "etc/init.d/snapcap",
+        "etc/init.d/snmpd",
+        "etc/init.d/snmptrap",
+        "etc/init.d/sysctl",
+        "etc/init.d/sysfixtime",
+        "etc/init.d/sysfixtime",
+        "etc/init.d/sysntpd",
+        "etc/init.d/system",
+        "etc/init.d/terminal",
+        "etc/init.d/ucitrack",
+        "etc/init.d/umount",
+        "etc/init.d/vsftpd",
+        "etc/init.d/wandete",
+        "etc/init.d/wanlan",
+        "etc/init.d/watchdog",
+        "etc/rc.d/S00sysfixtime",
+        "etc/rc.d/S00sysfixtime",
+        "etc/rc.d/S01auditwatch",
+        "etc/rc.d/S10system",
+        "etc/rc.d/S11sysctl",
+        "etc/rc.d/S13openssl",
+        "etc/rc.d/S19firewall",
+        "etc/rc.d/S50cron",
+        "etc/rc.d/S50vsftpd",
+        "etc/rc.d/S80mosquitto",
+        "etc/rc.d/S80ucitrack",
+        "etc/rc.d/S90ndppd",
+        "etc/rc.d/S90simtraydetection",
+        "etc/rc.d/S90snapcap",
+        "etc/rc.d/S90wandete",
+        "etc/rc.d/S90wanlan",
+        "etc/rc.d/S90watchdog",
+        "etc/rc.d/S94gpio_switch",
+        "etc/rc.d/S95done",
+        "etc/rc.d/S95schedulereboot",
+        "etc/rc.d/S96eventtrack",
+        "etc/rc.d/S96led",
+        "etc/rc.d/S96run_extraconfg",
+        "etc/rc.d/S98nuevo80.sh",
+        "etc/rc.d/S98sysntpd",
+        "etc/rc.d/S99email",
+        "etc/rc.d/S99ftp",
+        "etc/rc.d/S99ltrx-sshclientknownhosts",
+        "etc/rc.d/S99ltrx-sshclientusers",
+        "etc/rc.d/S99ltrx-sshserverkeys",
+        "etc/rc.d/S99ltrx-sshserverusers",
+        "etc/rc.d/S99ltrx-ssl",
+        "etc/rc.d/S99percepxion",
+        "etc/rc.d/S99percepxion_line",
+        "etc/rc.d/S99serialinit",
+        "etc/rc.d/S99smtp",
+        "etc/rc.d/S99snmpd",
+        "etc/rc.d/S99snmptrap",
+        "etc/rc.d/S99terminal"
+      ],
+      "notes": []
+    },
+    {
+      "name": "auditwatch",
+      "binary": "/usr/bin/auditwatch",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/auditwatch",
+        "etc/rc.d/S01auditwatch"
+      ],
+      "notes": []
+    },
+    {
+      "name": "kmodloader",
+      "binary": "/sbin/kmodloader",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/boot",
+        "etc/rc.d/S10boot"
+      ],
+      "notes": []
+    },
+    {
+      "name": "config_generate",
+      "binary": "/bin/config_generate",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/boot",
+        "etc/rc.d/S10boot"
+      ],
+      "notes": []
+    },
+    {
+      "name": "reload_config",
+      "binary": "/sbin/reload_config",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/boot",
+        "etc/rc.d/S10boot"
+      ],
+      "notes": []
+    },
+    {
+      "name": "cron",
+      "binary": "/sbin/validate_data",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/cron",
+        "etc/rc.d/S50cron"
+      ],
+      "notes": []
+    },
+    {
+      "name": "discovery",
+      "binary": "/bin/diresponder",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/discovery",
+        "etc/rc.d/S99discovery"
+      ],
+      "notes": []
+    },
+    {
+      "name": "email",
+      "binary": "/bin/emaild",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/email",
+        "etc/init.d/smtp",
+        "etc/rc.d/S99email",
+        "etc/rc.d/S99smtp"
+      ],
+      "notes": []
+    },
+    {
+      "name": "ipfilter",
+      "binary": "/usr/sbin/update_ipfilter",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/ipfilter",
+        "etc/rc.d/S99ipfilter"
+      ],
+      "notes": []
+    },
+    {
+      "name": "link",
+      "binary": "/usr/bin/eds5klink",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/link",
+        "etc/rc.d/S19link"
+      ],
+      "notes": []
+    },
+    {
+      "name": "ndppd",
+      "binary": "/usr/sbin/ndppd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/ndppd",
+        "etc/rc.d/S90ndppd"
+      ],
+      "notes": []
+    },
+    {
+      "name": "network",
+      "binary": "/sbin/netifd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/network",
+        "etc/rc.d/S20network"
+      ],
+      "notes": []
+    },
+    {
+      "name": "network",
+      "binary": "/sbin/wifi",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/network",
+        "etc/rc.d/S20network"
+      ],
+      "notes": []
+    },
+    {
+      "name": "nuevo80",
+      "binary": "/bin/ltrx_cli",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/nuevo80.sh",
+        "etc/rc.d/S98nuevo80.sh"
+      ],
+      "notes": []
+    },
+    {
+      "name": "odhcpd",
+      "binary": "/usr/sbin/odhcpd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/odhcpd",
+        "etc/rc.d/S35odhcpd"
+      ],
+      "notes": []
+    },
+    {
+      "name": "pptpinitwatchdog",
+      "binary": "/usr/sbin/pptpwatchdog",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/pptpinitwatchdog",
+        "etc/rc.d/S99pptpinitwatchdog"
+      ],
+      "notes": []
+    },
+    {
+      "name": "rpcd",
+      "binary": "/sbin/rpcd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/rpcd",
+        "etc/rc.d/S12rpcd"
+      ],
+      "notes": []
+    },
+    {
+      "name": "snmp",
+      "binary": "/usr/sbin/snmpd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/snmp",
+        "etc/rc.d/S51snmp"
+      ],
+      "notes": []
+    },
+    {
+      "name": "snmptrapd",
+      "binary": "/usr/sbin/snmptrapd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/snmptrapd",
+        "etc/rc.d/S50snmptrapd"
+      ],
+      "notes": []
+    },
+    {
+      "name": "socat",
+      "binary": "/usr/bin/socat",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/socat",
+        "etc/rc.d/S99socat"
+      ],
+      "notes": []
+    },
+    {
+      "name": "sshd",
+      "binary": "/usr/sbin/sshd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/sshd",
+        "etc/rc.d/S50sshd"
+      ],
+      "notes": []
+    },
+    {
+      "name": "sshd",
+      "binary": "/usr/bin/ssh-keygen",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/sshd",
+        "etc/rc.d/S50sshd"
+      ],
+      "notes": []
+    },
+    {
+      "name": "resetbutton",
+      "binary": "/usr/bin/resetbutton",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/sysinit",
+        "etc/rc.d/S12sysinit"
+      ],
+      "notes": []
+    },
+    {
+      "name": "dsrcts_server",
+      "binary": "/usr/bin/dsrcts_server",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/sysinit",
+        "etc/rc.d/S12sysinit"
+      ],
+      "notes": []
+    },
+    {
+      "name": "uhttpd",
+      "binary": "/usr/sbin/uhttpd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/uhttpd",
+        "etc/rc.d/S50uhttpd"
+      ],
+      "notes": []
+    },
+    {
+      "name": "urandom_seed",
+      "binary": "/sbin/urandom_seed",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/urandom_seed",
+        "etc/rc.d/S99urandom_seed"
+      ],
+      "notes": []
+    },
+    {
+      "name": "urngd",
+      "binary": "/sbin/urngd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/urngd",
+        "etc/rc.d/S00urngd"
+      ],
+      "notes": []
+    },
+    {
+      "name": "vsftpd",
+      "binary": "/usr/sbin/vsftpd",
+      "user": "root",
+      "drops_privileges": false,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/vsftpd",
+        "etc/rc.d/S50vsftpd"
+      ],
+      "notes": []
+    }
+  ],
+  "binary_analyses": {
+    "/bin/busybox": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/bin/busybox",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "bind",
+          "getsockname",
+          "recv",
+          "recvfrom",
+          "recvmsg",
+          "socket"
+        ],
+        "file_write": [
+          "chmod",
+          "chown",
+          "dprintf",
+          "fchmod",
+          "fchown",
+          "fopen",
+          "fprintf",
+          "fputs",
+          "freopen",
+          "ftruncate",
+          "fwrite",
+          "link",
+          "mkdir",
+          "open",
+          "rename",
+          "symlink",
+          "vfprintf"
+        ],
+        "auth": [
+          "crypt",
+          "getpwnam",
+          "getpwuid"
+        ],
+        "priv_drop": [
+          "initgroups",
+          "setegid",
+          "seteuid",
+          "setgid",
+          "setgroups",
+          "setuid"
+        ]
+      },
+      "import_count": 310
+    },
+    "/usr/bin/auditwatch": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/bin/auditwatch",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "open"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 53
+    },
+    "/sbin/kmodloader": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/sbin/kmodloader",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fputs",
+          "open"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 50
+    },
+    "/bin/config_generate": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/bin/config_generate",
+      "is_elf": false,
+      "arch": null,
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 0
+    },
+    "/sbin/reload_config": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/sbin/reload_config",
+      "is_elf": false,
+      "arch": null,
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 0
+    },
+    "/sbin/validate_data": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/sbin/validate_data",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fprintf"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 11
+    },
+    "/bin/diresponder": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/bin/diresponder",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "bind",
+          "recvmsg",
+          "socket"
+        ],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fputs",
+          "open"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 80
+    },
+    "/bin/emaild": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/bin/emaild",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fopen"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 79
+    },
+    "/usr/sbin/update_ipfilter": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/sbin/update_ipfilter",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fopen",
+          "fprintf"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 26
+    },
+    "/usr/bin/eds5klink": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/bin/eds5klink",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "socket"
+        ],
+        "file_write": [],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 15
+    },
+    "/usr/sbin/ndppd": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/sbin/ndppd",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "bind",
+          "recvmsg",
+          "socket"
+        ],
+        "file_write": [],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 114
+    },
+    "/sbin/netifd": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/sbin/netifd",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "socket"
+        ],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fputs",
+          "mkdir",
+          "open",
+          "openat",
+          "rename",
+          "vfprintf"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 195
+    },
+    "/sbin/wifi": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/sbin/wifi",
+      "is_elf": false,
+      "arch": null,
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 0
+    },
+    "/bin/ltrx_cli": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/bin/ltrx_cli",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "socket"
+        ],
+        "file_write": [
+          "chmod",
+          "fopen",
+          "fprintf",
+          "fputc",
+          "fputs",
+          "fwrite",
+          "open",
+          "vfprintf"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 347
+    },
+    "/usr/sbin/odhcpd": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/sbin/odhcpd",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 DYN (Position-Independent Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "bind",
+          "getsockname",
+          "recvmsg",
+          "socket"
+        ],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fputs",
+          "ftruncate",
+          "fwrite",
+          "open",
+          "rename"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 157
+    },
+    "/usr/sbin/pptpwatchdog": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/sbin/pptpwatchdog",
+      "is_elf": false,
+      "arch": null,
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 0
+    },
+    "/sbin/rpcd": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/sbin/rpcd",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 DYN (Position-Independent Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fputs",
+          "fwrite",
+          "mkdir",
+          "open"
+        ],
+        "auth": [
+          "crypt",
+          "getspnam"
+        ],
+        "priv_drop": []
+      },
+      "import_count": 145
+    },
+    "/usr/sbin/snmpd": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/sbin/snmpd",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "chown",
+          "fprintf",
+          "fputs",
+          "open"
+        ],
+        "auth": [
+          "getpwnam",
+          "getpwuid"
+        ],
+        "priv_drop": [
+          "initgroups",
+          "setgid",
+          "setgroups",
+          "setuid"
+        ]
+      },
+      "import_count": 102
+    },
+    "/usr/sbin/snmptrapd": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/sbin/snmptrapd",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fputc",
+          "fputs",
+          "open"
+        ],
+        "auth": [
+          "getpwnam"
+        ],
+        "priv_drop": [
+          "setgid",
+          "setgroups",
+          "setuid"
+        ]
+      },
+      "import_count": 114
+    },
+    "/usr/bin/socat": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/bin/socat",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "accept",
+          "bind",
+          "getpeername",
+          "getsockname",
+          "listen",
+          "recv",
+          "recvfrom",
+          "recvmsg",
+          "socket",
+          "socketpair"
+        ],
+        "file_write": [
+          "chmod",
+          "chown",
+          "creat",
+          "fchmod",
+          "fchown",
+          "fopen",
+          "fprintf",
+          "fputc",
+          "fputs",
+          "ftruncate",
+          "link",
+          "open",
+          "putc",
+          "symlink"
+        ],
+        "auth": [
+          "getpwnam",
+          "getpwuid"
+        ],
+        "priv_drop": [
+          "initgroups",
+          "setgid",
+          "setgroups",
+          "setuid"
+        ]
+      },
+      "import_count": 177
+    },
+    "/usr/sbin/sshd": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/sbin/sshd",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 DYN (Position-Independent Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "accept",
+          "bind",
+          "getpeername",
+          "getsockname",
+          "listen",
+          "socket",
+          "socketpair"
+        ],
+        "file_write": [
+          "chmod",
+          "chown",
+          "fopen",
+          "fprintf",
+          "fputc",
+          "fputs",
+          "fwrite",
+          "open"
+        ],
+        "auth": [
+          "getpwnam",
+          "getpwuid"
+        ],
+        "priv_drop": [
+          "initgroups",
+          "setgroups",
+          "setresgid",
+          "setreuid"
+        ]
+      },
+      "import_count": 352
+    },
+    "/usr/bin/ssh-keygen": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/bin/ssh-keygen",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 DYN (Position-Independent Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "bind",
+          "getsockname",
+          "listen",
+          "socket",
+          "socketpair"
+        ],
+        "file_write": [
+          "fchmod",
+          "fopen",
+          "fprintf",
+          "fputc",
+          "fputs",
+          "fwrite",
+          "link",
+          "mkdir",
+          "open",
+          "rename"
+        ],
+        "auth": [
+          "getpwnam",
+          "getpwuid"
+        ],
+        "priv_drop": [
+          "initgroups",
+          "setresgid",
+          "setreuid"
+        ]
+      },
+      "import_count": 371
+    },
+    "/usr/bin/resetbutton": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/bin/resetbutton",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "open"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 18
+    },
+    "/usr/bin/dsrcts_server": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/bin/dsrcts_server",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "accept",
+          "bind",
+          "listen",
+          "socket"
+        ],
+        "file_write": [
+          "fopen",
+          "fwrite"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 25
+    },
+    "/usr/sbin/uhttpd": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/sbin/uhttpd",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 DYN (Position-Independent Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "accept",
+          "bind",
+          "getsockname",
+          "listen",
+          "socket"
+        ],
+        "file_write": [
+          "fopen",
+          "fprintf",
+          "fputs",
+          "open"
+        ],
+        "auth": [
+          "crypt",
+          "getpwnam",
+          "getspnam"
+        ],
+        "priv_drop": []
+      },
+      "import_count": 116
+    },
+    "/sbin/urandom_seed": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/sbin/urandom_seed",
+      "is_elf": false,
+      "arch": null,
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 0
+    },
+    "/sbin/urngd": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/sbin/urngd",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [],
+        "file_write": [
+          "fprintf",
+          "open"
+        ],
+        "auth": [],
+        "priv_drop": []
+      },
+      "import_count": 23
+    },
+    "/usr/sbin/vsftpd": {
+      "binary": "work/scans/eds5000/extracted/rootfs/carved-ubi-de0100-3e000/usr/sbin/vsftpd",
+      "is_elf": true,
+      "arch": "ELF64 AArch64 EXEC (Executable file)",
+      "static_or_no_dynsyms": false,
+      "buckets": {
+        "network_input": [
+          "accept",
+          "bind",
+          "getpeername",
+          "getsockname",
+          "listen",
+          "recv",
+          "recvmsg",
+          "socket",
+          "socketpair"
+        ],
+        "file_write": [
+          "chmod",
+          "fchmod",
+          "fchown",
+          "ftruncate",
+          "mkdir",
+          "open",
+          "rename"
+        ],
+        "auth": [
+          "crypt",
+          "getpwnam",
+          "getpwuid",
+          "getspnam"
+        ],
+        "priv_drop": [
+          "initgroups",
+          "setgid",
+          "setgroups",
+          "setregid",
+          "setreuid",
+          "setuid"
+        ]
+      },
+      "import_count": 122
+    }
+  },
+  "findings": [
+    {
+      "type": "unauthenticated_privileged_file_write",
+      "service": "discovery",
+      "binary": "/bin/diresponder",
+      "user": "root",
+      "matched_network_symbols": [
+        "bind",
+        "recvmsg",
+        "socket"
+      ],
+      "matched_file_write_symbols": [
+        "fopen",
+        "fprintf",
+        "fputs",
+        "open"
+      ],
+      "auth_symbols_absent": true,
+      "priv_drop_absent": true,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/discovery",
+        "etc/rc.d/S99discovery"
+      ],
+      "notes": [],
+      "import_count": 80,
+      "static_or_no_dynsyms": false,
+      "supplementary": {
+        "interesting_strings": [
+          "/var/run/diresponder.pid",
+          "/tmp/diresponder.info",
+          "/tmp/ipc/cfg.ipc",
+          "/tmp/ipc/as.ipc"
+        ],
+        "versions": {
+          "etc/openwrt_release": "DISTRIB_ID='Lantronix EDS5000'\nDISTRIB_RELEASE='2.3.0.0R7'\nDISTRIB_REVISION='r19685-512e76967f'\nDISTRIB_TARGET='ma35d1/som'\nDISTRIB_ARCH='aarch64_generic'\nDISTRIB_DESCRIPTION='Lantronix EDS5000 2.3.0.0R7'\nDISTRIB_TAINTS='no-all busybox'\nDISTRIB_SUPRT_URL='https://cdn.lantronix.com/wp-content/uploads/pdf/PMD-00226_A-EDS5000-Series-Device-Server-User-Guide.pdf'\nDISTRIB_MANF_URL='https://www.lantronix.com'\nDISTRIB_BUG_URL='https://www.lantronix.com/support/'\nDISTRIB_HOME_URL='http://update.lantroni",
+          "etc/openwrt_version": "r19685-512e76967f"
+        }
+      },
+      "finding_id": "F001"
+    },
+    {
+      "type": "unauthenticated_privileged_file_write",
+      "service": "network",
+      "binary": "/sbin/netifd",
+      "user": "root",
+      "matched_network_symbols": [
+        "socket"
+      ],
+      "matched_file_write_symbols": [
+        "fopen",
+        "fprintf",
+        "fputs",
+        "mkdir",
+        "open",
+        "openat",
+        "rename",
+        "vfprintf"
+      ],
+      "auth_symbols_absent": true,
+      "priv_drop_absent": true,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/network",
+        "etc/rc.d/S20network"
+      ],
+      "notes": [],
+      "import_count": 195,
+      "static_or_no_dynsyms": false,
+      "supplementary": {
+        "interesting_strings": [
+          "/tmp/resolv.conf-%s.d/resolv.conf.auto",
+          "/etc/board.json",
+          "/tmp/resolv.conf.d/resolv.conf.auto",
+          "/etc/iproute2/rt_protos",
+          "/etc/iproute2/rt_tables"
+        ],
+        "versions": {
+          "etc/openwrt_release": "DISTRIB_ID='Lantronix EDS5000'\nDISTRIB_RELEASE='2.3.0.0R7'\nDISTRIB_REVISION='r19685-512e76967f'\nDISTRIB_TARGET='ma35d1/som'\nDISTRIB_ARCH='aarch64_generic'\nDISTRIB_DESCRIPTION='Lantronix EDS5000 2.3.0.0R7'\nDISTRIB_TAINTS='no-all busybox'\nDISTRIB_SUPRT_URL='https://cdn.lantronix.com/wp-content/uploads/pdf/PMD-00226_A-EDS5000-Series-Device-Server-User-Guide.pdf'\nDISTRIB_MANF_URL='https://www.lantronix.com'\nDISTRIB_BUG_URL='https://www.lantronix.com/support/'\nDISTRIB_HOME_URL='http://update.lantroni",
+          "etc/openwrt_version": "r19685-512e76967f"
+        }
+      },
+      "finding_id": "F002"
+    },
+    {
+      "type": "unauthenticated_privileged_file_write",
+      "service": "nuevo80",
+      "binary": "/bin/ltrx_cli",
+      "user": "root",
+      "matched_network_symbols": [
+        "socket"
+      ],
+      "matched_file_write_symbols": [
+        "chmod",
+        "fopen",
+        "fprintf",
+        "fputc",
+        "fputs",
+        "fwrite",
+        "open",
+        "vfprintf"
+      ],
+      "auth_symbols_absent": true,
+      "priv_drop_absent": true,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/nuevo80.sh",
+        "etc/rc.d/S98nuevo80.sh"
+      ],
+      "notes": [],
+      "import_count": 347,
+      "static_or_no_dynsyms": false,
+      "supplementary": {
+        "interesting_strings": [
+          "/tmp/ipc/cfg.ipc",
+          "/tmp/ipc/as.ipc",
+          "/tmp/ssh_%lu_%lu",
+          "openssl dsaparam -out /tmp/dsaparam.pem %u",
+          "openssl gendsa -out %s /tmp/dsaparam.pem",
+          "openssl dsa -in %s -pubout > /tmp/publickey.pem",
+          "ssh-keygen -f /tmp/publickey.pem -i -m pkcs8 > %s",
+          "/http/config/en_US/varid_help.mtxt",
+          "/var/run/mach10.pid",
+          "/tmp/mach10.errors",
+          "/tmp/last_fw_update",
+          "/http/config/email.mtxt",
+          "/tmp/mach10.available_%s",
+          "/tmp/mach10.status_update",
+          "/tmp/mach10.check_update",
+          "http/config/ssh.mtxt",
+          "/etc/ssl/clientcerts/rsa.%s.crt.pem",
+          "/etc/ssl/clientcerts/dsa.%s.crt.pem",
+          "/etc/ssl/clientcerts/ecdsa.%s.crt.pem",
+          "/http/config/strings.mtxt",
+          "/http/config/ssl.mtxt",
+          "rm -rf /tmp/ssl_work/",
+          "mkdir -p /tmp/ssl_work/",
+          "/tmp/ssl_work/cert_in2.pem",
+          "openssl x509 -in /tmp/ssl_work/cert_in2.pem -inform PEM -outform PEM -out /tmp/ssl_work/cert_in.pem 2>/dev/null",
+          "/tmp/ssl_work/cert_in.p7",
+          "openssl enc -base64 -d -in /tmp/ssl_work/cert_in.p7 -out /tmp/ssl_work/cert_in.p7b 2>/dev/null",
+          "/tmp/ssl_work/cert_in.p12b",
+          "openssl enc -base64 -d -in /tmp/ssl_work/cert_in.p12b -out /tmp/ssl_work/cert_in.p12 2>/dev/null",
+          "/tmp/ssl_work/key_in.pem",
+          "/tmp/ssl_work/key_in.enc",
+          "openssl rsa -passin pass:%s -in /tmp/ssl_work/key_in.enc -out /tmp/ssl_work/key_in.pem 2>/dev/null",
+          "openssl dsa -passin pass:%s -in /tmp/ssl_work/key_in.enc -out /tmp/ssl_work/key_in.pem 2>/dev/null",
+          "openssl ec -passin pass:%s -in /tmp/ssl_work/key_in.enc -out /tmp/ssl_work/key_in.pem 2>/dev/null",
+          "/tmp/ssl_work/key_in.p12b",
+          "openssl enc -base64 -d -in /tmp/ssl_work/key_in.p12b -out /tmp/ssl_work/key_in.p12 2>/dev/null",
+          "openssl pkcs12 -nodes -passin pass:%s -in /tmp/ssl_work/key_in.p12 -out /tmp/ssl_work/key_in.pem 2>/dev/null",
+          "openssl rsa -in /tmp/ssl_work/key_in.pem -out /tmp/ssl_work/key.pem",
+          "openssl dsa -in /tmp/ssl_work/key_in.pem -out /tmp/ssl_work/key.pem",
+          "openssl ec -in /tmp/ssl_work/key_in.pem -out /tmp/ssl_work/key.pem",
+          "openssl req -in /tmp/csr_cert.pem -noout -subject 2>/dev/null | awk -F'subject=' '{print $2}' | tr -d '",
+          "openssl req -in /tmp/csr_cert.pem -noout -text 2>/dev/null | grep 'Signature Algorithm: ' | awk -F'Signature Algorithm: ' '{print $2}'  | tr -d '",
+          "openssl rsa -in /tmp/csr_key.pem -text 2>/dev/null | grep 'Private-Key: ' | tr -d '",
+          "openssl ec -in /tmp/csr_key.pem -text 2>/dev/null | grep 'Private-Key: ' | tr -d '",
+          "openssl ecparam -name %s > /tmp/ecparam",
+          "' -newkey ec:/tmp/ecparam",
+          "-keyout /tmp/csr_key.pem -out /tmp/csr_cert.pem",
+          "openssl rsa -in /tmp/csr_key.pem -out /tmp/key.tmp",
+          "mv /tmp/key.tmp /tmp/csr_key.pem",
+          "openssl x509 -in /tmp/ssl_work/cert_in.pem_%d -out /tmp/ssl_work/cert.pem",
+          "openssl enc -base64 -d -in /tmp/ssl_work/cert_in.p7 -out /tmp/ssl_work/cert_in.p7b",
+          "openssl enc -base64 -d -in /tmp/ssl_work/cert_in.p12b -out /tmp/ssl_work/cert_in.p12",
+          ". /etc/ssl/misc/split_certs.sh /tmp/ssl_work/cert_in.pem",
+          "/tmp/ipc/evo.ipc",
+          "/tmp/import_",
+          "/tmp/export_",
+          "/tmp/xcrlist_",
+          "/tmp/cli_cmd_show_processes_%d",
+          "domains=`cat /etc/resolv.conf 2>/dev/null | grep search`;echo ${domains#search } | tr -d '",
+          "kill -USR2 `cat /var/run/mim_%d.pid`",
+          "/tmp/ser_cli_%d.pid",
+          "kill -USR1 `cat /var/run/mim_%d.pid`",
+          "cat /etc/shadow | grep '^%s:' | awk -F':' '{print $2}'",
+          "/tmp/system.initialized",
+          "/tmp/system.evo.initialized",
+          "/tmp/system.1.initialized",
+          "/tmp/ssh_client_user_%lu.%s"
+        ],
+        "versions": {
+          "etc/openwrt_release": "DISTRIB_ID='Lantronix EDS5000'\nDISTRIB_RELEASE='2.3.0.0R7'\nDISTRIB_REVISION='r19685-512e76967f'\nDISTRIB_TARGET='ma35d1/som'\nDISTRIB_ARCH='aarch64_generic'\nDISTRIB_DESCRIPTION='Lantronix EDS5000 2.3.0.0R7'\nDISTRIB_TAINTS='no-all busybox'\nDISTRIB_SUPRT_URL='https://cdn.lantronix.com/wp-content/uploads/pdf/PMD-00226_A-EDS5000-Series-Device-Server-User-Guide.pdf'\nDISTRIB_MANF_URL='https://www.lantronix.com'\nDISTRIB_BUG_URL='https://www.lantronix.com/support/'\nDISTRIB_HOME_URL='http://update.lantroni",
+          "etc/openwrt_version": "r19685-512e76967f"
+        }
+      },
+      "finding_id": "F003"
+    },
+    {
+      "type": "unauthenticated_privileged_file_write",
+      "service": "odhcpd",
+      "binary": "/usr/sbin/odhcpd",
+      "user": "root",
+      "matched_network_symbols": [
+        "bind",
+        "getsockname",
+        "recvmsg",
+        "socket"
+      ],
+      "matched_file_write_symbols": [
+        "fopen",
+        "fprintf",
+        "fputs",
+        "ftruncate",
+        "fwrite",
+        "open",
+        "rename"
+      ],
+      "auth_symbols_absent": true,
+      "priv_drop_absent": true,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/odhcpd",
+        "etc/rc.d/S35odhcpd"
+      ],
+      "notes": [],
+      "import_count": 157,
+      "static_or_no_dynsyms": false,
+      "supplementary": {
+        "versions": {
+          "etc/openwrt_release": "DISTRIB_ID='Lantronix EDS5000'\nDISTRIB_RELEASE='2.3.0.0R7'\nDISTRIB_REVISION='r19685-512e76967f'\nDISTRIB_TARGET='ma35d1/som'\nDISTRIB_ARCH='aarch64_generic'\nDISTRIB_DESCRIPTION='Lantronix EDS5000 2.3.0.0R7'\nDISTRIB_TAINTS='no-all busybox'\nDISTRIB_SUPRT_URL='https://cdn.lantronix.com/wp-content/uploads/pdf/PMD-00226_A-EDS5000-Series-Device-Server-User-Guide.pdf'\nDISTRIB_MANF_URL='https://www.lantronix.com'\nDISTRIB_BUG_URL='https://www.lantronix.com/support/'\nDISTRIB_HOME_URL='http://update.lantroni",
+          "etc/openwrt_version": "r19685-512e76967f"
+        }
+      },
+      "finding_id": "F004"
+    },
+    {
+      "type": "unauthenticated_privileged_file_write",
+      "service": "dsrcts_server",
+      "binary": "/usr/bin/dsrcts_server",
+      "user": "root",
+      "matched_network_symbols": [
+        "accept",
+        "bind",
+        "listen",
+        "socket"
+      ],
+      "matched_file_write_symbols": [
+        "fopen",
+        "fwrite"
+      ],
+      "auth_symbols_absent": true,
+      "priv_drop_absent": true,
+      "setuid_bit": false,
+      "sources": [
+        "etc/init.d/sysinit",
+        "etc/rc.d/S12sysinit"
+      ],
+      "notes": [],
+      "import_count": 25,
+      "static_or_no_dynsyms": false,
+      "supplementary": {
+        "interesting_strings": [
+          "/var/run/slave_dsrcts_%u"
+        ],
+        "versions": {
+          "etc/openwrt_release": "DISTRIB_ID='Lantronix EDS5000'\nDISTRIB_RELEASE='2.3.0.0R7'\nDISTRIB_REVISION='r19685-512e76967f'\nDISTRIB_TARGET='ma35d1/som'\nDISTRIB_ARCH='aarch64_generic'\nDISTRIB_DESCRIPTION='Lantronix EDS5000 2.3.0.0R7'\nDISTRIB_TAINTS='no-all busybox'\nDISTRIB_SUPRT_URL='https://cdn.lantronix.com/wp-content/uploads/pdf/PMD-00226_A-EDS5000-Series-Device-Server-User-Guide.pdf'\nDISTRIB_MANF_URL='https://www.lantronix.com'\nDISTRIB_BUG_URL='https://www.lantronix.com/support/'\nDISTRIB_HOME_URL='http://update.lantroni",
+          "etc/openwrt_version": "r19685-512e76967f"
+        }
+      },
+      "finding_id": "F005"
+    }
+  ],
+  "elapsed_extract_s": 149.66263818740845,
+  "elapsed_s": 149.673730134964,
+  "gemini": {
+    "scan_summary": "The structural analysis of the Lantronix EDS5000 firmware (v2.3.0.0R7) reveals a high-risk attack surface characterized by several custom vendor binaries (diresponder, ltrx_cli, dsrcts_server) running as root with active network listeners and file-write capabilities. Most notably, the 'nuevo80' service utilizes a CLI binary containing strings that suggest the use of unsanitized shell commands (e.g., openssl, grep /etc/shadow), indicating a high probability of both arbitrary file write and command injection. Standard OpenWrt components (netifd, odhcpd) are also present and privileged, though they represent a lower risk relative to the custom vendor-developed services.",
+    "findings": [
+      {
+        "finding_id": "F001",
+        "title": "Unauthenticated Privileged File Write in Discovery Service",
+        "explanation": "The discovery responder binary 'diresponder' runs as the root user and listens for network traffic (bind/recvmsg). It lacks symbols for authentication and privilege dropping, while importing functions that write to the filesystem. The presence of strings related to PID files and IPC sockets in /tmp suggests it manages state files that could be targeted for symlink attacks or arbitrary content injection if network-provided data is not sanitized.",
+        "priority": "High",
+        "attack_scenario": "An attacker sends a crafted UDP discovery packet to the service's listening port to trigger the creation or overwrite of files in /tmp or /var/run, potentially leading to a Denial of Service or hijacking of IPC mechanisms.",
+        "permanent_fix": "Modify the diresponder service to run as a non-privileged user and implement strict validation/sanitization of all network-received data before using it in file operations.",
+        "immediate_mitigation": "Disable the discovery service if not required for deployment, or use a firewall to restrict access to the discovery ports to trusted management subnets only.",
+        "compromise_indicators": "Unexpected file ownership or modified timestamps for files in /tmp/ipc/ or /tmp/diresponder.info, or the presence of non-standard files in /var/run/."
+      },
+      {
+        "finding_id": "F002",
+        "title": "Privileged Network Configuration Service Risk",
+        "explanation": "The netifd daemon is a core OpenWrt component running as root that manages network interfaces and writes configuration files like resolv.conf. While it is a standard component, its privileged status and interaction with network-derived data (e.g., via DHCP) mean that any vulnerability in its path handling or file renaming logic could allow for unauthorized system configuration changes.",
+        "priority": "Medium",
+        "attack_scenario": "An attacker on the local network provides a malicious DHCP response containing crafted hostnames or options designed to cause netifd to perform directory traversal when writing its temporary resolution files.",
+        "permanent_fix": "Ensure the service uses a restricted filesystem namespace or AppArmor/Selinux profile to limit file writes to a specific set of configuration directories.",
+        "immediate_mitigation": "Enable DHCP snooping on the local network switch to prevent unauthorized DHCP servers from providing malicious configuration data to the device.",
+        "compromise_indicators": "Modification of /etc/board.json or unexpected entries in /tmp/resolv.conf.d/ that do not match the expected network environment."
+      },
+      {
+        "finding_id": "F003",
+        "title": "High-Risk Privileged CLI Backend with Command Injection Potential",
+        "explanation": "The ltrx_cli binary, associated with the nuevo80 service, imports numerous file-writing and socket functions and runs as root. The binary contains strings suggesting it constructs shell commands for OpenSSL, shadow file parsing, and certificate management. The lack of authentication symbols combined with 'chmod' and 'fwrite' imports suggests an attacker who can reach the service's port might manipulate system-critical files or execute arbitrary commands.",
+        "priority": "High",
+        "attack_scenario": "An attacker interacts with the CLI service and provides malicious input that is concatenated into an internal 'openssl' or 'cat /etc/shadow' command string, resulting in root-level command execution.",
+        "permanent_fix": "Refactor the binary to use direct library APIs (such as OpenSSL's C API) instead of constructing shell commands via system() or popen(), and implement a robust authentication layer.",
+        "immediate_mitigation": "Immediately firewall the service's listening port to allow access only from authorized administrative IP addresses.",
+        "compromise_indicators": "Unusual files in /tmp/ssl_work/, modified timestamps on /etc/shadow, or the presence of files matching the pattern /tmp/ssh_client_user_*."
+      },
+      {
+        "finding_id": "F004",
+        "title": "Privileged DHCP/RA Daemon File Write Surface",
+        "explanation": "The odhcpd daemon manages DHCPv6 and Router Advertisements. It runs as root and writes state information (leases) to the filesystem. Although it is a standard OpenWrt daemon, its position as an unauthenticated network listener with root-level file write access (fopen, rename) makes it a critical target for local network attackers.",
+        "priority": "Medium",
+        "attack_scenario": "An attacker sends a flood of crafted DHCPv6 lease requests designed to exhaust filesystem space or exploit path traversal logic in how leases are recorded to disk.",
+        "permanent_fix": "Configure odhcpd to run within a chroot jail or use a dedicated unprivileged user for lease management tasks.",
+        "immediate_mitigation": "Isolate the device's management interface on a dedicated VLAN and disable IPv6 if it is not required for the specific deployment.",
+        "compromise_indicators": "Large numbers of lease files or corrupted lease databases in the service's designated storage directory."
+      },
+      {
+        "finding_id": "F005",
+        "title": "Unauthenticated Privileged Network Listener (dsrcts_server)",
+        "explanation": "The dsrcts_server binary is a custom service that listens for incoming TCP connections (accept, listen) and performs file writes (fopen, fwrite) as the root user. The extremely low import count (25) suggests a simple, potentially custom-built network server that may lack the robust input validation and security controls found in more mature network services.",
+        "priority": "High",
+        "attack_scenario": "An attacker connects to the dsrcts_server port and sends a payload that is written directly to a root-owned file, such as a PID file or log, without proper path validation.",
+        "permanent_fix": "Implement a mandatory authentication handshake before any data processing and use O_NOFOLLOW when opening files to prevent symlink-based attacks.",
+        "immediate_mitigation": "Restrict network access to the service's port using the device's internal firewall (iptables) to prevent external connections.",
+        "compromise_indicators": "Unexpected modifications to files matching the pattern /var/run/slave_dsrcts_* or log entries indicating failed or malformed connections to this service."
+      }
+    ]
+  }
+}
