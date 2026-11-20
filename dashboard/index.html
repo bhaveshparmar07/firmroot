@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Firmroot</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">◈</span>
+    <span class="brand-name">firmroot</span>
+  </div>
+  <div class="topbar-actions">
+    <select id="sample-select" aria-label="Firmware sample"></select>
+    <button id="load-btn" class="btn-primary">Load scan</button>
+  </div>
+</header>
+
+<main id="app">
+  <section id="scan-header" class="scan-header hidden">
+    <div class="scan-meta">
+      <h1 id="fw-name"></h1>
+      <div class="scan-sub">
+        <span id="svc-count"></span>
+        <span class="dot">·</span>
+        <span id="bin-count"></span>
+        <span class="dot">·</span>
+        <span id="findings-count"></span>
+      </div>
+      <code id="fw-sha" class="mono-dim"></code>
+    </div>
+    <div class="risk-gauge-wrap">
+      <svg id="risk-gauge" viewBox="0 0 120 120" width="120" height="120">
+        <circle cx="60" cy="60" r="52" class="gauge-track"></circle>
+        <circle id="gauge-arc" cx="60" cy="60" r="52" class="gauge-arc"></circle>
+      </svg>
+      <div class="gauge-label">
+        <div id="risk-score" class="risk-score">–</div>
+        <div class="risk-caption">risk score</div>
+      </div>
+    </div>
+  </section>
+
+  <p id="scan-summary" class="scan-summary hidden"></p>
+
+  <div id="findings-list" class="findings-list"></div>
+
+  <div id="empty-state" class="empty-state">
+    <p class="empty-title">No scan loaded</p>
+    <p class="empty-sub">Select a firmware sample and load its scan report.</p>
+  </div>
+
+  <div id="error-state" class="error-state hidden"></div>
+</main>
+
+<footer class="footer">
+  <span>firmroot — structural firmware analysis</span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

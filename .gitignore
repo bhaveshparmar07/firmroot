@@ -1,0 +1,28 @@
+# Firmware samples (large binaries)
+samples/
+
+# Extracted rootfs and work files
+work/
+extracted/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Environment
+environment/.env
+*.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+environment/gcp-sa.json
