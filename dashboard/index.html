@@ -785,13 +785,14 @@
 
             const trScan = document.createElement('tr');
             trScan.onclick = () => loadScanById(s.scan_id);
+            const statusColor = s.status === 'COMPLETED' ? '#10B981' : (s.status === 'PROCESSING' ? '#F59E0B' : '#F43F5E');
             trScan.innerHTML = `
               <td style="font-family:var(--font-mono);">${s.scan_id}</td>
               <td style="font-weight:600;">${s.filename}</td>
               <td>${s.total_evidence_count} items</td>
               <td style="color:#F43F5E; font-weight:700;">${s.risk_score}</td>
               <td style="color:#10B981;">${s.confidence_rating}</td>
-              <td><span style="color:#10B981; font-size:12px; font-weight:500;">COMPLETED</span></td>
+              <td><span style="color:${statusColor}; font-size:12px; font-weight:500;">${s.status}</span></td>
               <td><button class="btn-upload" style="padding:4px 10px; font-size:11px;" onclick="event.stopPropagation(); loadScanById('${s.scan_id}')">View Details</button></td>
             `;
             scansTable.appendChild(trScan);
