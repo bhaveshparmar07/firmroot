@@ -609,6 +609,8 @@
       }
     }
 
+    const API_BASE = window.location.origin;
+
     async function uploadFirmware(file) {
       const progress = document.getElementById('globalProgress');
       progress.style.display = 'block';
@@ -617,7 +619,7 @@
       formData.append('file', file);
 
       try {
-        const res = await fetch('/api/upload', {
+        const res = await fetch(`${API_BASE}/api/upload`, {
           method: 'POST',
           body: formData
         });
@@ -736,7 +738,7 @@
     async function toggleSignoff(scanId, groupId) {
       const isChecked = document.getElementById(`chk-${groupId}`).checked;
       try {
-        await fetch(`/api/review/${scanId}`, {
+        await fetch(`${API_BASE}/api/review/${scanId}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ group_id: groupId, reviewed: isChecked })
@@ -749,7 +751,7 @@
 
     async function refreshScansList() {
       try {
-        const res = await fetch('/api/scans');
+        const res = await fetch(`${API_BASE}/api/scans`);
         if (res.ok) {
           const scans = await res.json();
           document.getElementById('scansBadge').innerText = scans.length;
@@ -802,7 +804,7 @@
 
     async function loadScanById(scanId) {
       try {
-        const res = await fetch(`/api/scans/${scanId}`);
+        const res = await fetch(`${API_BASE}/api/scans/${scanId}`);
         if (res.ok) {
           const data = await res.json();
           loadScanToView(data);
