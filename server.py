@@ -44,7 +44,9 @@ SCANS_LEDGER = [
         "evidence_payload": {
             "metadata": {"filename": "EDS5000_2.3.0.0R7.rom", "filesize_bytes": 55592016, "scan_id": "FR-1732140000", "total_evidence_count": 5},
             "evidence": [
-                {"id": "EVID-001", "category": "STRUCTURAL_VULNERABILITY", "severity": "CRITICAL", "title": "Unauthenticated Privileged File-Write / Overwrite", "file_path": "/usr/bin/dsrcts_server", "line_number": None, "snippet": "Binary 'dsrcts_server' is invoked at boot as root by etc/init.d/sysinit:32. It accepts untrusted network input (accept, bind, listen, socket) and performs file write operations (fopen, fwrite) without importing any authentication checks (PAM, crypt) or privilege de-escalation routines (setuid, seteuid)."}
+                {"id": "EVID-001", "category": "STRUCTURAL_VULNERABILITY", "severity": "CRITICAL", "title": "Unauthenticated Privileged File-Write / Overwrite", "file_path": "/usr/bin/dsrcts_server", "line_number": None, "snippet": "Binary 'dsrcts_server' is invoked at boot as root by etc/init.d/sysinit:32. It accepts untrusted network input (accept, bind, listen, socket) and performs file write operations (fopen, fwrite) without importing any authentication checks (PAM, crypt) or privilege de-escalation routines (setuid, seteuid)."},
+                {"id": "EVID-002", "category": "HARDCODED_SECRET", "severity": "CRITICAL", "title": "Hardcoded Cryptographic Keys & Embedded Credentials", "file_path": "/etc/shadow", "line_number": 1, "snippet": "root:$1$abcdefg$hashstring...:17000:0:99999:7:::"},
+                {"id": "EVID-003", "category": "HARDCODED_SECRET", "severity": "CRITICAL", "title": "Hardcoded Cryptographic Keys & Embedded Credentials", "file_path": "/etc/ssl/private/server.key", "line_number": None, "snippet": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAk..."}
             ]
         },
         "triage_payload": {
@@ -52,7 +54,7 @@ SCANS_LEDGER = [
             "risk_score": 85,
             "findings_groups": [
                 {"group_id": "GRP-01", "title": "Unauthenticated Privileged File-Write in /usr/bin/dsrcts_server", "priority": "HIGH", "cwe_id": "CWE-73: External Control of File Name or Path", "risk_explanation": "Binary runs as root with network input linked to file operations without authentication.", "remediation_guidance": "Add authentication to TCP/8887, validate paths, use O_NOFOLLOW.", "linked_evidence_ids": ["EVID-001"]},
-                {"group_id": "GRP-02", "title": "Hardcoded Cryptographic Keys & Embedded Credentials", "priority": "CRITICAL", "cwe_id": "CWE-798: Use of Hard-coded Credentials", "risk_explanation": "Identified hardcoded secrets including password hashes.", "remediation_guidance": "Purge static keys from /etc. Provision unique per-device credentials.", "linked_evidence_ids": []}
+                {"group_id": "GRP-02", "title": "Hardcoded Cryptographic Keys & Embedded Credentials", "priority": "CRITICAL", "cwe_id": "CWE-798: Use of Hard-coded Credentials", "risk_explanation": "Identified hardcoded secrets including password hashes.", "remediation_guidance": "Purge static keys from /etc. Provision unique per-device credentials.", "linked_evidence_ids": ["EVID-002", "EVID-003"]}
             ]
         }
     },
@@ -92,7 +94,8 @@ SCANS_LEDGER = [
             "metadata": {"filename": "XR1000.chk", "filesize_bytes": 73000000, "scan_id": "FR-1732142000", "total_evidence_count": 8},
             "evidence": [
                 {"id": "EVID-001", "category": "STRUCTURAL_VULNERABILITY", "severity": "HIGH", "title": "Unauthenticated Privileged File-Write / Overwrite", "file_path": "/usr/bin/upagent", "line_number": None, "snippet": "Binary 'upagent' runs as root with network input and file operations without authentication."},
-                {"id": "EVID-002", "category": "STRUCTURAL_VULNERABILITY", "severity": "HIGH", "title": "Unauthenticated Privileged File-Write / Overwrite", "file_path": "/usr/bin/xagent", "line_number": None, "snippet": "Binary 'xagent' runs as root with network input and file operations without authentication."}
+                {"id": "EVID-002", "category": "STRUCTURAL_VULNERABILITY", "severity": "HIGH", "title": "Unauthenticated Privileged File-Write / Overwrite", "file_path": "/usr/bin/xagent", "line_number": None, "snippet": "Binary 'xagent' runs as root with network input and file operations without authentication."},
+                {"id": "EVID-003", "category": "VULNERABLE_COMPONENT", "severity": "MEDIUM", "title": "Outdated Core Binaries with Known Exploits", "file_path": "/usr/bin/busybox", "line_number": None, "snippet": "BusyBox version 1.20.2 contains known CVE-2021-42384"}
             ]
         },
         "triage_payload": {
@@ -101,7 +104,7 @@ SCANS_LEDGER = [
             "findings_groups": [
                 {"group_id": "GRP-01", "title": "Unauthenticated Privileged File-Write in /usr/bin/upagent", "priority": "HIGH", "cwe_id": "CWE-73: External Control of File Name or Path", "risk_explanation": "UPAgent service accepts network input and writes files as root without auth.", "remediation_guidance": "Add authentication and restrict file write paths.", "linked_evidence_ids": ["EVID-001"]},
                 {"group_id": "GRP-02", "title": "Unauthenticated Privileged File-Write in /usr/bin/xagent", "priority": "HIGH", "cwe_id": "CWE-73: External Control of File Name or Path", "risk_explanation": "XAgent service similar vulnerability pattern.", "remediation_guidance": "Apply same fixes as upagent.", "linked_evidence_ids": ["EVID-002"]},
-                {"group_id": "GRP-03", "title": "Outdated Core Binaries with Known Exploits", "priority": "MEDIUM", "cwe_id": "CWE-1395: Dependency on Vulnerable Third-Party Component", "risk_explanation": "Found outdated utilities with published CVEs.", "remediation_guidance": "Upgrade toolchain to vendor-patched releases.", "linked_evidence_ids": []}
+                {"group_id": "GRP-03", "title": "Outdated Core Binaries with Known Exploits", "priority": "MEDIUM", "cwe_id": "CWE-1395: Dependency on Vulnerable Third-Party Component", "risk_explanation": "Found outdated utilities with published CVEs.", "remediation_guidance": "Upgrade toolchain to vendor-patched releases.", "linked_evidence_ids": ["EVID-003"]}
             ]
         }
     }
