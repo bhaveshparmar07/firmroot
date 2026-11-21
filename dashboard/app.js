@@ -1,5 +1,7 @@
 /* Firmroot dashboard — reads real scan report.json files. No mock data. */
 
+const API = "https://firmroot-77011178237.us-central1.run.app";
+
 const SAMPLES = [
   { id: "eds5000", label: "EDS5000 v2.3.0.0R7 (Lantronix)", path: "../findings/eds5000/report.json" },
   { id: "jwnr",    label: "JWNR2000v3 v1.0.0.32 (TBS)",   path: "../findings/jwnr/report.json" },
@@ -90,9 +92,24 @@ function findingCard(ev, tri) {
   return card;
 }
 
+async function loadLiveScan(scanId) {
+  const res = await fetch(`${API}/scan/${scanId}`, { cache: "no-store" });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const meta = await res.json();
+  if (meta.status !== "done" || !meta.report) {
+    throw new Error(`scan ${meta.status}${meta.error ? ": " + meta.error : ""}`);
+  }
+  const label = `${meta.firmware} — live scan ${scanId}`;
+  render(meta.report, { label });
+}
+
 async function loadSample(sample) {
   $("error-state").classList.add("hidden");
   try {
+    if (sample.id?.startsWith("live:")) {
+      await loadLiveScan(sample.id.slice(5));
+      return;
+    }
     const res = await fetch(sample.path, { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status} — ${sample.path}`);
     const report = await res.json();
@@ -137,14 +154,34 @@ function render(report, sample) {
   }
 }
 
-function init() {
+async function init() {
   const sel = $("sample-select");
   for (const s of SAMPLES) {
     const o = document.createElement("option");
     o.value = s.id; o.textContent = s.label;
     sel.appendChild(o);
   }
-  const load = () => loadSample(SAMPLES.find(s => s.id === sel.value));
+  // live scans from Cloud Run
+  try {
+    const res = await fetch(`${API}/scans`, { cache: "no-store" });
+    if (res.ok) {
+      const scans = await res.json();
+      const done = scans.filter(s => s.status === "done");
+      if (done.length) {
+        const grp = document.createElement("optgroup");
+        grp.label = "Cloud Run scans";
+        for (const s of done.slice(0, 10)) {
+          const o = document.createElement("option");
+          o.value = "live:" + s.scan_id;
+          o.textContent = `${s.firmware} · ${new Date(s.created_at * 1000).toLocaleString()}`;
+          grp.appendChild(o);
+        }
+        sel.appendChild(grp);
+      }
+    }
+  } catch (_) { /* API unreachable — local samples still work */ }
+  const load = () => loadSample(SAMPLES.find(s => s.id === sel.value) ||
+    { id: sel.value, path: null });
   $("load-btn").addEventListener("click", load);
   sel.addEventListener("change", load);
   load(); // default: first sample populated on first load
