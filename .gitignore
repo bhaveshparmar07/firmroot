@@ -27,3 +27,9 @@ environment/.env
 Thumbs.db
 environment/gcp-sa.json
 PROGRESS.md
+uploads/
+extracted_runs/
+__pycache__/
+test_*.py
+check_*.py
+*.sh

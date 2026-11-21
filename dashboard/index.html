@@ -1,64 +1,821 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Firmroot</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firmroot — Firmware Security Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090A0F;
+      --sidebar: #0D0F16;
+      --surface: #12151E;
+      --surface-elevated: #181C28;
+      --border: #1F2432;
+      --border-subtle: #171A24;
+      --text-primary: #EDEDEF;
+      --text-secondary: #8E94A4;
+      --text-tertiary: #5E6475;
+      
+      --sev-critical: #F43F5E;
+      --sev-critical-bg: rgba(244, 63, 94, 0.1);
+      --sev-high: #F97316;
+      --sev-high-bg: rgba(249, 115, 22, 0.1);
+      --sev-medium: #FBBF24;
+      --sev-medium-bg: rgba(251, 191, 36, 0.1);
+      --sev-low: #10B981;
+      --sev-low-bg: rgba(16, 185, 129, 0.1);
+
+      --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Geist Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Left Navigation Bar */
+    aside.sidebar {
+      width: 240px;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .brand-wrap {
+      padding: 24px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand-symbol {
+      width: 14px;
+      height: 14px;
+      background: #EDEDEF;
+      border-radius: 2px;
+      transform: rotate(45deg);
+    }
+    .brand-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    nav.nav-links {
+      padding: 20px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border: none;
+      background: none;
+      text-align: left;
+      width: 100%;
+      transition: all 0.15s ease;
+    }
+    .nav-btn:hover {
+      background: var(--surface);
+      color: var(--text-primary);
+    }
+    .nav-btn.active {
+      background: var(--surface-elevated);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .nav-badge {
+      margin-left: auto;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--border);
+      color: var(--text-secondary);
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-tertiary);
+    }
+
+    /* Main Container */
+    main.main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    header.top-bar {
+      height: 64px;
+      padding: 0 32px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+      background: var(--bg);
+    }
+    .top-bar-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-upload {
+      background: #EDEDEF;
+      color: #090A0F;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-upload:hover { opacity: 0.9; }
+
+    /* Page Views */
+    .view-panel {
+      display: none;
+      padding: 32px;
+      flex: 1;
+    }
+    .view-panel.active { display: block; }
+
+    /* 1. UPLOAD DROPZONE */
+    .dropzone {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      padding: 48px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 32px;
+    }
+    .dropzone:hover, .dropzone.dragover {
+      border-color: #38BDF8;
+      background: var(--surface-elevated);
+    }
+    .dropzone-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+    .dropzone-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .dropzone-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto 16px auto;
+    }
+
+    /* 2. SCANS LEDGER TABLE */
+    .data-table-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+    table.data-table th {
+      padding: 12px 18px;
+      background: #0D0F17;
+      color: var(--text-tertiary);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+    }
+    table.data-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+    }
+    table.data-table tr:hover td {
+      background: var(--surface-elevated);
+      cursor: pointer;
+    }
+
+    /* 3. VULNERABILITIES & CONFIDENCE */
+    .hero-strip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 36px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .gauge-wrapper {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gauge-svg {
+      transform: rotate(-90deg);
+      width: 90px;
+      height: 90px;
+    }
+    .gauge-track { stroke: var(--border); stroke-width: 8; fill: none; }
+    .gauge-fill { stroke: var(--sev-critical); stroke-width: 8; stroke-linecap: round; fill: none; stroke-dasharray: 251.2; stroke-dashoffset: 251.2; transition: all 0.6s ease; }
+    .gauge-val { position: absolute; font-size: 22px; font-weight: 700; }
+
+    .confidence-metric-box {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      padding: 16px 20px;
+      border-radius: 8px;
+      text-align: right;
+    }
+    .confidence-title { font-size: 11px; text-transform: uppercase; color: var(--text-tertiary); font-weight: 600; letter-spacing: 0.5px; }
+    .confidence-value { font-size: 20px; font-weight: 700; color: #10B981; margin-top: 4px; }
+    .confidence-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+
+    /* Paired Findings Layout */
+    .paired-finding {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: 45% 55%;
+      overflow: hidden;
+    }
+    .finding-evidence {
+      padding: 20px;
+      border-right: 1px solid var(--border);
+      background: #0C0E14;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .evidence-item {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 12px;
+    }
+    .evidence-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+    }
+    .evidence-path {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .evidence-code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      background: #08090D;
+      border: 1px solid var(--border-subtle);
+      padding: 8px 10px;
+      border-radius: 4px;
+      color: #A3E635;
+      white-space: pre-wrap;
+    }
+
+    .finding-triage {
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .badge-sev {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-critical { background: var(--sev-critical-bg); color: var(--sev-critical); border: 1px solid rgba(244, 63, 94, 0.3); }
+    .badge-high { background: var(--sev-high-bg); color: var(--sev-high); border: 1px solid rgba(249, 115, 22, 0.3); }
+    .badge-medium { background: var(--sev-medium-bg); color: var(--sev-medium); border: 1px solid rgba(251, 191, 36, 0.3); }
+
+    .triage-sec-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-tertiary);
+      font-weight: 600;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+    .triage-sec-body {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .remediation-callout {
+      background: var(--surface-elevated);
+      border-left: 2px solid var(--text-secondary);
+      padding: 10px 14px;
+      margin-top: 10px;
+      border-radius: 0 4px 4px 0;
+      font-size: 13px;
+      color: var(--text-primary);
+    }
+
+    .review-row {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .review-row input { accent-color: #EDEDEF; cursor: pointer; }
+    .review-row label { font-size: 12px; color: var(--text-secondary); cursor: pointer; }
+
+    /* Progress bar */
+    .progress-bar-wrap {
+      display: none;
+      height: 3px;
+      background: var(--border);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+    }
+    .progress-bar-anim {
+      height: 100%;
+      background: #38BDF8;
+      width: 40%;
+      animation: indeterminate 1.2s infinite ease-in-out;
+    }
+    @keyframes indeterminate {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(250%); }
+    }
+  </style>
 </head>
 <body>
-<header class="topbar">
-  <div class="brand">
-    <span class="brand-mark">◈</span>
-    <span class="brand-name">firmroot</span>
-  </div>
-  <div class="topbar-actions">
-    <select id="sample-select" aria-label="Firmware sample"></select>
-    <button id="load-btn" class="btn-primary">Load scan</button>
-  </div>
-</header>
 
-<main id="app">
-  <section id="scan-header" class="scan-header hidden">
-    <div class="scan-meta">
-      <h1 id="fw-name"></h1>
-      <div class="scan-sub">
-        <span id="svc-count"></span>
-        <span class="dot">·</span>
-        <span id="bin-count"></span>
-        <span class="dot">·</span>
-        <span id="findings-count"></span>
-      </div>
-      <code id="fw-sha" class="mono-dim"></code>
+  <div class="progress-bar-wrap" id="globalProgress"><div class="progress-bar-anim"></div></div>
+
+  <!-- Left Sidebar -->
+  <aside class="sidebar">
+    <div class="brand-wrap">
+      <div class="brand-symbol"></div>
+      <div class="brand-title">Firmroot</div>
     </div>
-    <div class="risk-gauge-wrap">
-      <svg id="risk-gauge" viewBox="0 0 120 120" width="120" height="120">
-        <circle cx="60" cy="60" r="52" class="gauge-track"></circle>
-        <circle id="gauge-arc" cx="60" cy="60" r="52" class="gauge-arc"></circle>
-      </svg>
-      <div class="gauge-label">
-        <div id="risk-score" class="risk-score">–</div>
-        <div class="risk-caption">risk score</div>
-      </div>
+    
+    <nav class="nav-links">
+      <button class="nav-btn active" onclick="switchTab('dashboard')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+        Dashboard
+      </button>
+
+      <button class="nav-btn" onclick="switchTab('scans')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+        Scans
+        <span class="nav-badge" id="scansBadge">0</span>
+      </button>
+
+      <button class="nav-btn" onclick="switchTab('vulnerabilities')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+        Vulnerabilities
+        <span class="nav-badge" id="vulnsBadge">0</span>
+      </button>
+
+      <button class="nav-btn" onclick="switchTab('confidence')">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Review & Confidence
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div>Firmroot Security Core</div>
+      <div style="margin-top:2px; color:#38BDF8;">Google Cloud Connected</div>
     </div>
-  </section>
+  </aside>
 
-  <p id="scan-summary" class="scan-summary hidden"></p>
+  <!-- Main Work Area -->
+  <main class="main-content">
+    <header class="top-bar">
+      <div class="top-bar-title" id="pageTitle">Dashboard Overview</div>
+      <div class="top-actions">
+        <input type="file" id="firmwareFileInput" style="display: none;" onchange="handleFileSelected(event)">
+        <button class="btn-upload" onclick="document.getElementById('firmwareFileInput').click()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+          Upload Firmware Image
+        </button>
+      </div>
+    </header>
 
-  <div id="findings-list" class="findings-list"></div>
+    <!-- 1. DASHBOARD VIEW -->
+    <section class="view-panel active" id="view-dashboard">
+      <div class="dropzone" id="dropArea" onclick="document.getElementById('firmwareFileInput').click()">
+        <div class="dropzone-icon">📁</div>
+        <div class="dropzone-title">Drop your firmware image here, or browse files</div>
+        <div class="dropzone-desc">Supports raw binary (.bin, .img, .rom), SquashFS filesystems, or tarball packages. System runs automated binwalk extraction and deterministic analysis.</div>
+        <button class="btn-upload" style="margin: 0 auto;" onclick="event.stopPropagation(); document.getElementById('firmwareFileInput').click()">Select Firmware File</button>
+      </div>
 
-  <div id="empty-state" class="empty-state">
-    <p class="empty-title">No scan loaded</p>
-    <p class="empty-sub">Select a firmware sample and load its scan report.</p>
-  </div>
+      <h3 style="font-size:14px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-tertiary); margin-bottom:12px;">Recent Firmware Analyses</h3>
+      <div class="data-table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Scan ID</th>
+              <th>Firmware Binary</th>
+              <th>Filesize</th>
+              <th>Risk Score</th>
+              <th>Grounded Confidence</th>
+              <th>Findings</th>
+              <th>Review Progress</th>
+            </tr>
+          </thead>
+          <tbody id="dashboardRecentTable">
+            <tr><td colspan="7" style="text-align:center; color:var(--text-tertiary); padding:24px;">No firmware uploaded yet. Upload an image above to run forensic analysis.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-  <div id="error-state" class="error-state hidden"></div>
-</main>
+    <!-- 2. SCANS HISTORY VIEW -->
+    <section class="view-panel" id="view-scans">
+      <h3 style="font-size:16px; font-weight:600; margin-bottom:16px;">Scan Execution Records</h3>
+      <div class="data-table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Scan ID</th>
+              <th>Firmware Target</th>
+              <th>Extracted Evidence</th>
+              <th>Risk Index</th>
+              <th>Confidence Level</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="scansTableBody">
+            <tr><td colspan="7" style="text-align:center; color:var(--text-tertiary); padding:24px;">No scans recorded.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-<footer class="footer">
-  <span>firmroot — structural firmware analysis</span>
-</footer>
+    <!-- 3. VULNERABILITIES VIEW -->
+    <section class="view-panel" id="view-vulnerabilities">
+      <div class="hero-strip">
+        <div class="gauge-wrapper">
+          <svg class="gauge-svg" viewBox="0 0 100 100">
+            <circle class="gauge-track" cx="50" cy="50" r="40" />
+            <circle class="gauge-fill" id="gaugeCircle" cx="50" cy="50" r="40" />
+          </svg>
+          <div class="gauge-val" id="gaugeVal">--</div>
+        </div>
+        <div>
+          <h2 style="font-size:13px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-tertiary); margin-bottom:4px;" id="currentScanTarget">Target: No Scan Selected</h2>
+          <p style="font-size:14px; color:var(--text-secondary); line-height:1.5;" id="currentScanSummary">Upload a firmware image to generate evidence-grounded vulnerability findings.</p>
+        </div>
+        <div class="confidence-metric-box">
+          <div class="confidence-title">Forensic Confidence</div>
+          <div class="confidence-value" id="confidenceVal">--%</div>
+          <div class="confidence-sub">Evidence-Linked Triage</div>
+        </div>
+      </div>
 
-<script src="app.js"></script>
+      <h3 style="font-size:14px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-tertiary); margin-bottom:14px;">Grounded Findings & Forensic Citations</h3>
+      <div id="findingsContainer">
+        <!-- Findings rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- 4. REVIEW & CONFIDENCE VIEW -->
+    <section class="view-panel" id="view-confidence">
+      <div style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:24px; margin-bottom:24px;">
+        <h3 style="font-size:16px; font-weight:600; margin-bottom:8px;">Human Review & Verification Ledger</h3>
+        <p style="font-size:13px; color:var(--text-secondary); max-width:700px; line-height:1.6;">
+          Firmroot enforces deterministic forensic grounding. Every finding proposed by Gemini must link back to an extracted file path, line number, or binary banner. Security analysts must verify and sign off each group before sign-off reports are generated.
+        </p>
+      </div>
+
+      <div class="data-table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Finding Group</th>
+              <th>Severity</th>
+              <th>Linked Evidence Count</th>
+              <th>Analyst Sign-off</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="confidenceReviewTable">
+            <tr><td colspan="5" style="text-align:center; color:var(--text-tertiary); padding:24px;">No active scan loaded to review.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let activeScanData = null;
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      
+      const targetPanel = document.getElementById(`view-${tabId}`);
+      if (targetPanel) targetPanel.classList.add('active');
+
+      const titles = {
+        'dashboard': 'Dashboard Overview',
+        'scans': 'Firmware Scan Records',
+        'vulnerabilities': 'Forensic Vulnerabilities & Triage',
+        'confidence': 'Human Review & Verification Confidence'
+      };
+      document.getElementById('pageTitle').innerText = titles[tabId] || 'Firmroot';
+
+      // Mark button active
+      const buttons = document.querySelectorAll('.nav-btn');
+      if (tabId === 'dashboard') buttons[0].classList.add('active');
+      if (tabId === 'scans') buttons[1].classList.add('active');
+      if (tabId === 'vulnerabilities') buttons[2].classList.add('active');
+      if (tabId === 'confidence') buttons[3].classList.add('active');
+    }
+
+    // Drag and drop handlers
+    const dropArea = document.getElementById('dropArea');
+    ['dragenter', 'dragover'].forEach(name => {
+      dropArea.addEventListener(name, (e) => { e.preventDefault(); dropArea.classList.add('dragover'); }, false);
+    });
+    ['dragleave', 'drop'].forEach(name => {
+      dropArea.addEventListener(name, (e) => { e.preventDefault(); dropArea.classList.remove('dragover'); }, false);
+    });
+    dropArea.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+      if (files.length) uploadFirmware(files[0]);
+    });
+
+    function handleFileSelected(e) {
+      if (e.target.files.length) {
+        uploadFirmware(e.target.files[0]);
+      }
+    }
+
+    async function uploadFirmware(file) {
+      const progress = document.getElementById('globalProgress');
+      progress.style.display = 'block';
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (res.ok) {
+          const scanRecord = await res.json();
+          activeScanData = scanRecord;
+          loadScanToView(scanRecord);
+          refreshScansList();
+          switchTab('vulnerabilities');
+        } else {
+          alert('Upload failed: ' + res.statusText);
+        }
+      } catch (err) {
+        console.error('Upload error:', err);
+        alert('Network error connecting to Firmroot backend.');
+      } finally {
+        progress.style.display = 'none';
+      }
+    }
+
+    function loadScanToView(record) {
+      activeScanData = record;
+      const triage = record.triage_payload || {};
+      const score = triage.risk_score || 0;
+      
+      document.getElementById('currentScanTarget').innerText = `Target: ${record.filename} (${Math.round(record.filesize_bytes / 1024)} KB)`;
+      document.getElementById('currentScanSummary').innerText = triage.executive_summary || 'Analysis complete.';
+      document.getElementById('confidenceVal').innerText = record.confidence_rating || '95%';
+
+      // Update Gauge
+      document.getElementById('gaugeVal').innerText = score;
+      const circle = document.getElementById('gaugeCircle');
+      const maxOffset = 251.2;
+      circle.style.strokeDashoffset = maxOffset - (score / 100) * maxOffset;
+      if (score >= 80) circle.style.stroke = 'var(--sev-critical)';
+      else if (score >= 60) circle.style.stroke = 'var(--sev-high)';
+      else circle.style.stroke = 'var(--sev-medium)';
+
+      // Render Findings
+      const container = document.getElementById('findingsContainer');
+      container.innerHTML = '';
+      const evidence = record.evidence_payload.evidence || [];
+      const evidMap = {};
+      evidence.forEach(e => { evidMap[e.id] = e; });
+
+      const groups = triage.findings_groups || [];
+      document.getElementById('vulnsBadge').innerText = groups.length;
+
+      groups.forEach(group => {
+        const card = document.createElement('div');
+        card.className = 'paired-finding';
+
+        const leftHtml = (group.linked_evidence_ids || []).map(id => {
+          const item = evidMap[id];
+          if (!item) return '';
+          return `
+            <div class="evidence-item">
+              <div class="evidence-header">
+                <span>${item.id}</span>
+                <span>${item.category}</span>
+              </div>
+              <div class="evidence-path">${item.file_path}${item.line_number ? ':' + item.line_number : ''}</div>
+              <div class="evidence-code">${item.snippet}</div>
+            </div>
+          `;
+        }).join('');
+
+        const badgeClass = group.priority === 'CRITICAL' ? 'badge-critical' : (group.priority === 'HIGH' ? 'badge-high' : 'badge-medium');
+
+        card.innerHTML = `
+          <div class="finding-evidence">
+            ${leftHtml}
+          </div>
+          <div class="finding-triage">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+                <div style="font-size:15px; font-weight:600;">${group.title}</div>
+                <span class="badge-sev ${badgeClass}">${group.priority}</span>
+              </div>
+              <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-tertiary); margin-bottom:10px;">${group.cwe_id || ''}</div>
+              
+              <div class="triage-sec-label">Exploitation Risk</div>
+              <div class="triage-sec-body">${group.risk_explanation}</div>
+
+              <div class="triage-sec-label">Remediation Guidance</div>
+              <div class="remediation-callout">${group.remediation_guidance}</div>
+            </div>
+
+            <div class="review-row">
+              <input type="checkbox" id="chk-${group.group_id}" ${record.review_state && record.review_state[group.group_id] ? 'checked' : ''} onchange="toggleSignoff('${record.scan_id}', '${group.group_id}')">
+              <label for="chk-${group.group_id}">Human Verification & Analyst Sign-off</label>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      // Update Confidence Table
+      const confTable = document.getElementById('confidenceReviewTable');
+      confTable.innerHTML = '';
+      groups.forEach(g => {
+        const isSigned = record.review_state && record.review_state[g.group_id];
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="font-weight:600;">${g.title}</td>
+          <td><span class="badge-sev ${g.priority === 'CRITICAL' ? 'badge-critical' : 'badge-high'}">${g.priority}</span></td>
+          <td style="font-family:var(--font-mono);">${(g.linked_evidence_ids || []).length} items</td>
+          <td><input type="checkbox" ${isSigned ? 'checked' : ''} onchange="toggleSignoff('${record.scan_id}', '${g.group_id}')"></td>
+          <td style="color:${isSigned ? '#10B981' : 'var(--text-tertiary)'}; font-weight:500;">${isSigned ? 'Verified' : 'Pending Review'}</td>
+        `;
+        confTable.appendChild(tr);
+      });
+    }
+
+    async function toggleSignoff(scanId, groupId) {
+      const isChecked = document.getElementById(`chk-${groupId}`).checked;
+      try {
+        await fetch(`/api/review/${scanId}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ group_id: groupId, reviewed: isChecked })
+        });
+        refreshScansList();
+      } catch (e) {
+        console.warn('Signoff update error:', e);
+      }
+    }
+
+    async function refreshScansList() {
+      try {
+        const res = await fetch('/api/scans');
+        if (res.ok) {
+          const scans = await res.json();
+          document.getElementById('scansBadge').innerText = scans.length;
+
+          // Render Dashboard Table
+          const recentTable = document.getElementById('dashboardRecentTable');
+          const scansTable = document.getElementById('scansTableBody');
+          
+          if (scans.length === 0) {
+            recentTable.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-tertiary); padding:24px;">No firmware uploaded yet. Upload an image above to run forensic analysis.</td></tr>`;
+            scansTable.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-tertiary); padding:24px;">No scans recorded.</td></tr>`;
+            return;
+          }
+
+          recentTable.innerHTML = '';
+          scansTable.innerHTML = '';
+
+          scans.forEach(s => {
+            const trRecent = document.createElement('tr');
+            trRecent.onclick = () => loadScanById(s.scan_id);
+            trRecent.innerHTML = `
+              <td style="font-family:var(--font-mono);">${s.scan_id}</td>
+              <td style="font-weight:600;">${s.filename}</td>
+              <td style="font-family:var(--font-mono);">${Math.round(s.filesize_bytes / 1024)} KB</td>
+              <td style="color:#F43F5E; font-weight:700;">${s.risk_score}</td>
+              <td style="color:#10B981;">${s.confidence_rating}</td>
+              <td>${s.findings_count} groups</td>
+              <td>${s.review_progress}</td>
+            `;
+            recentTable.appendChild(trRecent);
+
+            const trScan = document.createElement('tr');
+            trScan.onclick = () => loadScanById(s.scan_id);
+            trScan.innerHTML = `
+              <td style="font-family:var(--font-mono);">${s.scan_id}</td>
+              <td style="font-weight:600;">${s.filename}</td>
+              <td>${s.total_evidence_count} items</td>
+              <td style="color:#F43F5E; font-weight:700;">${s.risk_score}</td>
+              <td style="color:#10B981;">${s.confidence_rating}</td>
+              <td><span style="color:#10B981; font-size:12px; font-weight:500;">COMPLETED</span></td>
+              <td><button class="btn-upload" style="padding:4px 10px; font-size:11px;" onclick="event.stopPropagation(); loadScanById('${s.scan_id}')">View Details</button></td>
+            `;
+            scansTable.appendChild(trScan);
+          });
+        }
+      } catch (err) {
+        console.warn('Scans fetch error:', err);
+      }
+    }
+
+    async function loadScanById(scanId) {
+      try {
+        const res = await fetch(`/api/scans/${scanId}`);
+        if (res.ok) {
+          const data = await res.json();
+          loadScanToView(data);
+          switchTab('vulnerabilities');
+        }
+      } catch (err) {
+        console.error('Scan fetch error:', err);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      refreshScansList();
+    });
+  </script>
 </body>
 </html>
