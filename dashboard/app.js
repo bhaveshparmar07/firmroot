@@ -1,6 +1,4 @@
-/* Firmroot dashboard — reads real scan report.json files. No mock data. */
-
-const API = "https://firmroot-77011178237.us-central1.run.app";
+/* Firmroot dashboard — reads the 3 committed scan report.json files. */
 
 const SAMPLES = [
   { id: "eds5000", label: "EDS5000 v2.3.0.0R7 (Lantronix)", path: "../findings/eds5000/report.json" },
@@ -17,27 +15,6 @@ const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g,
   c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-function riskScore(report) {
-  // Derive a 0-100 score from finding priorities — every point traceable
-  // to a real gemini priority field in the report.
-  const weights = { Critical: 30, High: 18, Medium: 8, Low: 2 };
-  let score = 0;
-  for (const f of report.gemini?.findings ?? []) {
-    score += weights[f.priority] ?? 0;
-  }
-  score += Math.min(report.findings?.length ?? 0, 5); // candidate surface
-  return Math.min(100, score);
-}
-
-function gauge(score) {
-  const arc = $("gauge-arc");
-  const C = 326.7;
-  arc.style.strokeDashoffset = C * (1 - score / 100);
-  arc.style.stroke = score >= 60 ? "var(--crit)" : score >= 35 ? "var(--high)" : score >= 15 ? "var(--med)" : "var(--low)";
-  $("risk-score").textContent = score;
-  $("risk-score").style.color = arc.style.stroke;
-}
-
 function findingCard(ev, tri) {
   const sev = tri?.priority ?? "Low";
   const sevColor = SEV[sev] ?? SEV.Low;
@@ -49,7 +26,6 @@ function findingCard(ev, tri) {
   const wr  = (ev.matched_file_write_symbols ?? []).map(s => `<span class="sym-tag wr">${esc(s)}</span>`).join("");
   const sources = (ev.sources ?? []).map(s => `<code>${esc(s)}</code>`).join(" ");
 
-  const field = (label, val) => val ? `<h4>${label}</h4><p>${esc(val)}</p>` : "";
   const supp = ev.supplementary ?? {};
   const suppBits = [];
   if (supp.versions) suppBits.push(`<h4>Versions</h4><p>${esc(JSON.stringify(supp.versions))}</p>`);
@@ -92,26 +68,11 @@ function findingCard(ev, tri) {
   return card;
 }
 
-async function loadLiveScan(scanId) {
-  const res = await fetch(`${API}/scan/${scanId}`, { cache: "no-store" });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const meta = await res.json();
-  if (meta.status !== "done" || !meta.report) {
-    throw new Error(`scan ${meta.status}${meta.error ? ": " + meta.error : ""}`);
-  }
-  const label = `${meta.firmware} — live scan ${scanId}`;
-  render(meta.report, { label });
-}
-
 async function loadSample(sample) {
   $("error-state").classList.add("hidden");
   try {
-    if (sample.id?.startsWith("live:")) {
-      await loadLiveScan(sample.id.slice(5));
-      return;
-    }
     const res = await fetch(sample.path, { cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status} — ${sample.path}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const report = await res.json();
     render(report, sample);
   } catch (e) {
@@ -136,8 +97,6 @@ function render(report, sample) {
   $("findings-count").textContent = `${report.findings.length} candidate findings`;
   $("fw-sha").textContent = `sha256 ${report.sha256.slice(0, 24)}…`;
 
-  gauge(riskScore(report));
-
   const summary = report.gemini?.scan_summary;
   if (summary) {
     $("scan-summary").textContent = summary;
@@ -146,7 +105,16 @@ function render(report, sample) {
     $("scan-summary").classList.add("hidden");
   }
 
+  // Highest-severity finding drives the risk number — traceable to a
+  // real gemini priority field, not a synthetic metric.
+  const prio = { Critical: 4, High: 3, Medium: 2, Low: 1 };
   const triage = new Map((report.gemini?.findings ?? []).map(f => [f.finding_id, f]));
+  const worst = Math.max(0, ...(report.gemini?.findings ?? []).map(f => prio[f.priority] ?? 0));
+  const scoreEl = $("risk-score");
+  scoreEl.textContent = ["—", "Low", "Medium", "High", "Critical"][worst] ?? "—";
+  scoreEl.style.color = ["var(--low)", "var(--low)", "var(--med)", "var(--high)", "var(--crit)"][worst];
+  $("risk-caption").textContent = "top finding severity";
+
   const list = $("findings-list");
   list.innerHTML = "";
   for (const ev of report.findings) {
@@ -154,34 +122,14 @@ function render(report, sample) {
   }
 }
 
-async function init() {
+function init() {
   const sel = $("sample-select");
   for (const s of SAMPLES) {
     const o = document.createElement("option");
     o.value = s.id; o.textContent = s.label;
     sel.appendChild(o);
   }
-  // live scans from Cloud Run
-  try {
-    const res = await fetch(`${API}/scans`, { cache: "no-store" });
-    if (res.ok) {
-      const scans = await res.json();
-      const done = scans.filter(s => s.status === "done");
-      if (done.length) {
-        const grp = document.createElement("optgroup");
-        grp.label = "Cloud Run scans";
-        for (const s of done.slice(0, 10)) {
-          const o = document.createElement("option");
-          o.value = "live:" + s.scan_id;
-          o.textContent = `${s.firmware} · ${new Date(s.created_at * 1000).toLocaleString()}`;
-          grp.appendChild(o);
-        }
-        sel.appendChild(grp);
-      }
-    }
-  } catch (_) { /* API unreachable — local samples still work */ }
-  const load = () => loadSample(SAMPLES.find(s => s.id === sel.value) ||
-    { id: sel.value, path: null });
+  const load = () => loadSample(SAMPLES.find(s => s.id === sel.value));
   $("load-btn").addEventListener("click", load);
   sel.addEventListener("change", load);
   load(); // default: first sample populated on first load
