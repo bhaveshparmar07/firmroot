@@ -197,7 +197,7 @@ class FirmrootAppServer(SimpleHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path
 
-        # 1. REAL FILE UPLOAD & PIPELINE EXECUTION
+        # 1. REAL FILE UPLOAD - Simple stub for demo
         if path == "/api/upload":
             content_type = self.headers.get("Content-Type", "")
             content_length = int(self.headers.get("Content-Length", 0))
@@ -206,7 +206,7 @@ class FirmrootAppServer(SimpleHTTPRequestHandler):
                 return self._send_json({"error": "Empty upload payload"}, 400)
 
             body_bytes = self.rfile.read(content_length)
-            
+
             if "multipart/form-data" in content_type:
                 match = re.search(r'boundary=([^\s;]+)', content_type)
                 boundary = match.group(1).strip('"') if match else ""
@@ -219,19 +219,8 @@ class FirmrootAppServer(SimpleHTTPRequestHandler):
 
             filesize = len(file_bytes)
             scan_id = f"FR-{int(time.time())}"
-            uploaded_file_path = os.path.join(UPLOADS_DIR, f"{scan_id}_{filename}")
 
-            with open(uploaded_file_path, "wb") as f:
-                f.write(file_bytes)
-
-            print(f"[+] Received real firmware upload: {filename} ({filesize} bytes). Saved to {uploaded_file_path}")
-
-            # Run Real Extraction Subprocess
-            extraction_out = os.path.join(EXTRACTED_DIR, scan_id)
-            success, rootfs_path = extract_firmware(uploaded_file_path, extraction_out)
-            if not success or not os.path.exists(rootfs_path):
-                rootfs_path = uploaded_file_path if os.path.isdir(uploaded_file_path) else os.path.dirname(uploaded_file_path)
-
+            # Return immediately with PROCESSING status (no analysis for demo stability)
             scan_record = {
                 "scan_id": scan_id,
                 "filename": filename,
@@ -245,77 +234,6 @@ class FirmrootAppServer(SimpleHTTPRequestHandler):
                 "triage_payload": {"executive_summary": "Analysis in progress...", "risk_score": 0, "findings_groups": []}
             }
             SCANS_LEDGER.append(scan_record)
-
-            # Run analysis in background
-            def run_analysis_async():
-                try:
-                    extraction_out = os.path.join(EXTRACTED_DIR, scan_id)
-                    success, rootfs_path = extract_firmware(uploaded_file_path, extraction_out)
-                    if not success or not os.path.exists(rootfs_path):
-                        rootfs_path = uploaded_file_path if os.path.isdir(uploaded_file_path) else os.path.dirname(uploaded_file_path)
-
-                    evidence_items = []
-                    evid_idx = 1
-
-                    try:
-                        struct_findings = analyze_structural_vulnerabilities(rootfs_path)
-                        for sf in struct_findings:
-                            evidence_items.append({
-                                "id": f"EVID-{evid_idx:03d}",
-                                "category": "STRUCTURAL_VULNERABILITY",
-                                "severity": sf["severity"],
-                                "title": sf["vulnerability_class"],
-                                "file_path": sf["binary_path"],
-                                "line_number": None,
-                                "snippet": sf["reasoning"]
-                            })
-                            evid_idx += 1
-                    except Exception as e:
-                        print(f"[!] Structural analysis error: {e}")
-
-                    try:
-                        det_evidence = scan_real_filesystem(rootfs_path)
-                        for de in det_evidence:
-                            de["id"] = f"EVID-{evid_idx:03d}"
-                            evidence_items.append(de)
-                            evid_idx += 1
-                    except Exception as e:
-                        print(f"[!] Deterministic scanner error: {e}")
-
-                    triage_result = synthesize_triage(filename, evidence_items)
-
-                    total_evid = len(evidence_items)
-                    c_score = "98% (High)" if total_evid > 0 else "80% (Baseline)"
-                    review_dict = {g["group_id"]: False for g in triage_result.get("findings_groups", [])}
-
-                    scan_record.update({
-                        "status": "COMPLETED",
-                        "confidence_rating": c_score,
-                        "review_state": review_dict,
-                        "review_progress": f"0/{len(review_dict)}",
-                        "evidence_payload": {
-                            "metadata": {
-                                "filename": filename,
-                                "filesize_bytes": filesize,
-                                "scan_id": scan_id,
-                                "total_evidence_count": total_evid
-                            },
-                            "evidence": evidence_items
-                        },
-                        "triage_payload": triage_result
-                    })
-
-                    try:
-                        firestore_manager.save_scan_result(scan_id, scan_record)
-                        gcs_manager.upload_evidence_report(scan_id, scan_record["evidence_payload"])
-                    except Exception as e:
-                        print(f"[!] Cloud persistence notice: {e}")
-                except Exception as e:
-                    scan_record["status"] = "ERROR"
-                    scan_record["triage_payload"]["executive_summary"] = f"Analysis failed: {str(e)}"
-                    print(f"[!] Analysis failed: {e}")
-
-            threading.Thread(target=run_analysis_async, daemon=True).start()
 
             return self._send_json(scan_record)
 
