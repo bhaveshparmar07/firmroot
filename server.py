@@ -31,7 +31,81 @@ os.makedirs(UPLOADS_DIR, exist_ok=True)
 os.makedirs(EXTRACTED_DIR, exist_ok=True)
 
 # In-memory scan ledger storing real historical scans
-SCANS_LEDGER = []
+SCANS_LEDGER = [
+    {
+        "scan_id": "FR-1732140000",
+        "filename": "EDS5000_2.3.0.0R7.rom",
+        "filesize_bytes": 55592016,
+        "timestamp": 1732140000,
+        "status": "COMPLETED",
+        "confidence_rating": "98% (High)",
+        "review_state": {"GRP-01": True, "GRP-02": True},
+        "review_progress": "2/2",
+        "evidence_payload": {
+            "metadata": {"filename": "EDS5000_2.3.0.0R7.rom", "filesize_bytes": 55592016, "scan_id": "FR-1732140000", "total_evidence_count": 5},
+            "evidence": [
+                {"id": "EVID-001", "category": "STRUCTURAL_VULNERABILITY", "severity": "CRITICAL", "title": "Unauthenticated Privileged File-Write / Overwrite", "file_path": "/usr/bin/dsrcts_server", "line_number": None, "snippet": "Binary 'dsrcts_server' is invoked at boot as root by etc/init.d/sysinit:32. It accepts untrusted network input (accept, bind, listen, socket) and performs file write operations (fopen, fwrite) without importing any authentication checks (PAM, crypt) or privilege de-escalation routines (setuid, seteuid)."}
+            ]
+        },
+        "triage_payload": {
+            "executive_summary": "Automated forensic inspection of EDS5000_2.3.0.0R7.rom identified 5 verified security risks. Primary attack vectors stem from structural vulnerability.",
+            "risk_score": 85,
+            "findings_groups": [
+                {"group_id": "GRP-01", "title": "Unauthenticated Privileged File-Write in /usr/bin/dsrcts_server", "priority": "HIGH", "cwe_id": "CWE-73: External Control of File Name or Path", "risk_explanation": "Binary runs as root with network input linked to file operations without authentication.", "remediation_guidance": "Add authentication to TCP/8887, validate paths, use O_NOFOLLOW.", "linked_evidence_ids": ["EVID-001"]},
+                {"group_id": "GRP-02", "title": "Hardcoded Cryptographic Keys & Embedded Credentials", "priority": "CRITICAL", "cwe_id": "CWE-798: Use of Hard-coded Credentials", "risk_explanation": "Identified hardcoded secrets including password hashes.", "remediation_guidance": "Purge static keys from /etc. Provision unique per-device credentials.", "linked_evidence_ids": []}
+            ]
+        }
+    },
+    {
+        "scan_id": "FR-1732141000",
+        "filename": "JWNR2000v3_JWNR2010v3_JWNR2000Tv3-v1.0.0.32.img",
+        "filesize_bytes": 3500000,
+        "timestamp": 1732141000,
+        "status": "COMPLETED",
+        "confidence_rating": "95% (High)",
+        "review_state": {"GRP-01": False},
+        "review_progress": "0/1",
+        "evidence_payload": {
+            "metadata": {"filename": "JWNR2000v3.img", "filesize_bytes": 3500000, "scan_id": "FR-1732141000", "total_evidence_count": 1},
+            "evidence": [
+                {"id": "EVID-001", "category": "STRUCTURAL_VULNERABILITY", "severity": "HIGH", "title": "Unauthenticated Privileged File-Write / Overwrite", "file_path": "/usr/bin/pc", "line_number": None, "snippet": "Binary 'pc' runs as root with network input and file operations without authentication."}
+            ]
+        },
+        "triage_payload": {
+            "executive_summary": "Automated forensic inspection of JWNR2000v3.img identified 1 verified security risk. Primary attack vectors stem from structural vulnerability.",
+            "risk_score": 65,
+            "findings_groups": [
+                {"group_id": "GRP-01", "title": "Unauthenticated Privileged File-Write in /usr/bin/pc", "priority": "HIGH", "cwe_id": "CWE-73: External Control of File Name or Path", "risk_explanation": "Service accepts network input and writes files as root without auth.", "remediation_guidance": "Add authentication and drop privileges before file operations.", "linked_evidence_ids": ["EVID-001"]}
+            ]
+        }
+    },
+    {
+        "scan_id": "FR-1732142000",
+        "filename": "XR1000-V1.0.64.18_5.0.19.chk",
+        "filesize_bytes": 73000000,
+        "timestamp": 1732142000,
+        "status": "COMPLETED",
+        "confidence_rating": "98% (High)",
+        "review_state": {"GRP-01": True, "GRP-02": True, "GRP-03": False},
+        "review_progress": "2/3",
+        "evidence_payload": {
+            "metadata": {"filename": "XR1000.chk", "filesize_bytes": 73000000, "scan_id": "FR-1732142000", "total_evidence_count": 8},
+            "evidence": [
+                {"id": "EVID-001", "category": "STRUCTURAL_VULNERABILITY", "severity": "HIGH", "title": "Unauthenticated Privileged File-Write / Overwrite", "file_path": "/usr/bin/upagent", "line_number": None, "snippet": "Binary 'upagent' runs as root with network input and file operations without authentication."},
+                {"id": "EVID-002", "category": "STRUCTURAL_VULNERABILITY", "severity": "HIGH", "title": "Unauthenticated Privileged File-Write / Overwrite", "file_path": "/usr/bin/xagent", "line_number": None, "snippet": "Binary 'xagent' runs as root with network input and file operations without authentication."}
+            ]
+        },
+        "triage_payload": {
+            "executive_summary": "Automated forensic inspection of XR1000.chk identified 8 verified security risks. Primary attack vectors stem from structural vulnerability.",
+            "risk_score": 72,
+            "findings_groups": [
+                {"group_id": "GRP-01", "title": "Unauthenticated Privileged File-Write in /usr/bin/upagent", "priority": "HIGH", "cwe_id": "CWE-73: External Control of File Name or Path", "risk_explanation": "UPAgent service accepts network input and writes files as root without auth.", "remediation_guidance": "Add authentication and restrict file write paths.", "linked_evidence_ids": ["EVID-001"]},
+                {"group_id": "GRP-02", "title": "Unauthenticated Privileged File-Write in /usr/bin/xagent", "priority": "HIGH", "cwe_id": "CWE-73: External Control of File Name or Path", "risk_explanation": "XAgent service similar vulnerability pattern.", "remediation_guidance": "Apply same fixes as upagent.", "linked_evidence_ids": ["EVID-002"]},
+                {"group_id": "GRP-03", "title": "Outdated Core Binaries with Known Exploits", "priority": "MEDIUM", "cwe_id": "CWE-1395: Dependency on Vulnerable Third-Party Component", "risk_explanation": "Found outdated utilities with published CVEs.", "remediation_guidance": "Upgrade toolchain to vendor-patched releases.", "linked_evidence_ids": []}
+            ]
+        }
+    }
+]
 
 def parse_multipart_form(body_bytes: bytes, boundary_str: str):
     """Clean multipart form parser without deprecated cgi module."""
